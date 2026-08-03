@@ -1,0 +1,64 @@
+namespace Game.Player.FSM;
+
+using BitterCitrus.SRC.Core.BInput;
+using Godot;
+using System;
+using System.Collections.Generic;
+
+
+public partial class Fall : PlayerState
+{
+    List<StringName> groundedStates = new List<StringName>
+    {
+        PlayerStateNames.Idle,
+        PlayerStateNames.Walk,
+    };
+
+    public override void Enter()
+    {
+        if (groundedStates.Contains(FSM.PrevStateName))
+        {
+            FSM.CreateKoyoteTime();
+        }
+    }
+
+    public override void Exit()
+    {
+        FSM.ConsumeKoyoteTime();
+    }
+
+    public override void ApplyVelocity(double delta)
+    {
+        FSM.PlayerVelocity.X = FSM.InputAxis_X * FSM.Stats.WalkSpeed;
+        FSM.PlayerVelocity.Y = Mathf.MoveToward(FSM.PlayerVelocity.Y, FSM.Stats.MaxFallSpeed, (float)delta * FSM.Player.GetGravity().Y);
+
+        FSM.FacingDirection = FSM.LastInputAxis_X;
+    }
+    
+    public override void CheckIfSwitchState(double delta)
+    {
+        if (FSM.Player.IsOnFloor())
+        {
+            this.SwitchStateToIdleOrWalk();
+        }
+    }
+
+    public override void HandleInputEvent(InputEvent @event)
+    {
+        if (@event.IsActionPressed(InputActionNames.Jump))
+        {
+            if (FSM.CanKoyoteJump)
+            {
+                EmitSignalStateSwitchRequested(PlayerStateNames.Jump);
+            }
+            else
+            {
+                FSM.CreateJumpBuffer();
+            }
+        }
+        else
+        {
+            base.HandleInputEvent(@event);
+        }
+    }
+}

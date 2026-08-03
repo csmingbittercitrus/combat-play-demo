@@ -1,0 +1,150 @@
+[gd_scene format=3 uid="uid://wq2ndpsuowlh"]
+
+[ext_resource type="Script" uid="uid://drdb4n6x1svn1" path="res://ui/utils/ui_selection/UISelection.cs" id="1_ws1hn"]
+[ext_resource type="Texture2D" uid="uid://c5kmsc62xr2jk" path="res://ui/temp_resources/ui_arrow_1.png" id="2_llbpo"]
+[ext_resource type="LabelSettings" uid="uid://oxlq2okbxxrc" path="res://ui/utils/ui_selection/ui_selection.tres" id="3_c7p5w"]
+[ext_resource type="Texture2D" uid="uid://co4ql55gmaiu7" path="res://ui/temp_resources/ui_arrow_2.png" id="4_b8gio"]
+[ext_resource type="Texture2D" uid="uid://bski5gguj7otm" path="res://ui/temp_resources/ui_arrow_3.png" id="5_5raa2"]
+
+[sub_resource type="Animation" id="Animation_43ntq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_llbpo")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect2:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_llbpo")]
+}
+
+[sub_resource type="Animation" id="Animation_cg6u0"]
+resource_name = "get_focus"
+length = 0.16666667
+step = 0.041666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.083333336, 0.16666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_llbpo"), ExtResource("4_b8gio"), ExtResource("5_5raa2")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect2:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.083333336, 0.16666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_llbpo"), ExtResource("4_b8gio"), ExtResource("5_5raa2")]
+}
+
+[sub_resource type="Animation" id="Animation_r4yxk"]
+resource_name = "release_focus"
+length = 0.083333336
+step = 0.041666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.041666668, 0.083333336),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("5_5raa2"), ExtResource("4_b8gio"), ExtResource("2_llbpo")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect2:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.041666668, 0.083333336),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("5_5raa2"), ExtResource("4_b8gio"), ExtResource("2_llbpo")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ywbbq"]
+_data = {
+&"RESET": SubResource("Animation_43ntq"),
+&"get_focus": SubResource("Animation_cg6u0"),
+&"release_focus": SubResource("Animation_r4yxk")
+}
+
+[node name="UISelection" type="Control" unique_id=1740037921 node_paths=PackedStringArray("animation")]
+custom_minimum_size = Vector2(160, 80)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+script = ExtResource("1_ws1hn")
+animation = NodePath("AnimationPlayer")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=760398467]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=1142020177]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_llbpo")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=1658772710]
+layout_mode = 2
+text = "BaseButton"
+label_settings = ExtResource("3_c7p5w")
+horizontal_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer" unique_id=153378111]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_llbpo")
+stretch_mode = 3
+flip_h = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1108933092]
+root_node = NodePath("../HBoxContainer")
+libraries/ = SubResource("AnimationLibrary_ywbbq")
+
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_focus_exited"]
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

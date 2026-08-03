@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://dpx85hoqgroxs"]
+
+[ext_resource type="Script" uid="uid://dp8ontf85oa50" path="res://ui/settings/utils/SettingsTab.cs" id="1_32kgv"]
+[ext_resource type="LabelSettings" uid="uid://oxlq2okbxxrc" path="res://ui/utils/ui_selection/ui_selection.tres" id="1_hdc7v"]
+
+[node name="SettingsTab" type="Control" unique_id=217005152 node_paths=PackedStringArray("BG")]
+custom_minimum_size = Vector2(200, 120)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_32kgv")
+BG = NodePath("ColorRect")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1174600526]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.39688927, 0.39688927, 0.39688924, 1)
+
+[node name="Label" type="Label" parent="." unique_id=336683844]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "SettingsTab"
+label_settings = ExtResource("1_hdc7v")
+horizontal_alignment = 1
+vertical_alignment = 1

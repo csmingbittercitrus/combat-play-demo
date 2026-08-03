@@ -1,0 +1,13 @@
+[gd_resource type="Resource" format=3 uid="uid://dymj75g8627bn"]
+
+[ext_resource type="Script" uid="uid://cjwc1g6al4xab" path="res://scenes/in_game/player_char/fsm/utils/FSMStats.cs" id="1_roppb"]
+
+[resource]
+script = ExtResource("1_roppb")
+WalkSpeed = 700.0
+JumpSpeed = -1600.0
+JumpAccel = 3000.0
+MaxFallSpeed = 3000.0
+DashSpeed = 2000.0
+SprintSpeed = 1100.0
+DecelSpeed = 700.0

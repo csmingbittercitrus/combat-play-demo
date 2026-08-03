@@ -1,0 +1,10 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+build/
+bin/
+
+.mono/
+*.csproj
+*.sln

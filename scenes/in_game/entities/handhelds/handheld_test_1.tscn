@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bqi7brr7qt4au"]
+
+[ext_resource type="Script" uid="uid://1h3te2rkkpct" path="res://scenes/in_game/entities/handhelds/HandheldTest1.cs" id="1_depqi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ileh0"]
+size = Vector2(50, 50)
+
+[node name="HandheldTest1" type="CharacterBody2D" unique_id=861019370]
+z_index = 5
+collision_layer = 20
+collision_mask = 256
+script = ExtResource("1_depqi")
+LaunchSpeed = 1200.0
+Accel_X = 100.0
+GravityCoefficient = 0.3
+BounceType = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1142504794]
+shape = SubResource("RectangleShape2D_ileh0")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1800111820]
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 25.0
+offset_bottom = 25.0
+color = Color(0.48988706, 0.3452182, 0.51849335, 1)

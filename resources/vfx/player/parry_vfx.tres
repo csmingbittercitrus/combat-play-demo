@@ -1,0 +1,6 @@
+[gd_resource type="AtlasTexture" format=3 uid="uid://uwye4fiya8d1"]
+
+[ext_resource type="Texture2D" uid="uid://3ganw7sslnj6" path="res://resources/vfx/player/parry_vfx.png" id="1_c1lg7"]
+
+[resource]
+atlas = ExtResource("1_c1lg7")

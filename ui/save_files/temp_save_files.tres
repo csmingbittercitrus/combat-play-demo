@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://0wlq28smxkdj"]
+
+[ext_resource type="FontFile" uid="uid://b5hlgq6277p3y" path="res://resources/fonts/spectral_bold.ttf" id="1_rnpg5"]
+
+[resource]
+font = ExtResource("1_rnpg5")
+font_size = 48

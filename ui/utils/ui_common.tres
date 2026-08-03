@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://cmysld0ae4jw5"]
+
+[ext_resource type="FontFile" uid="uid://b5hlgq6277p3y" path="res://resources/fonts/spectral_bold.ttf" id="1_dugod"]
+
+[resource]
+font = ExtResource("1_dugod")
+font_size = 24

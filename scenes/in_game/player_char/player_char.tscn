@@ -1,0 +1,482 @@
+[gd_scene format=3 uid="uid://n07rxt8elh73"]
+
+[ext_resource type="Script" uid="uid://dhgb3b720lm2d" path="res://scenes/in_game/player_char/PlayerChar.cs" id="1_britx"]
+[ext_resource type="Script" uid="uid://cdobnqp1kyt0j" path="res://scenes/in_game/player_char/fsm/Player_FSM.cs" id="2_t7lxb"]
+[ext_resource type="Resource" uid="uid://dymj75g8627bn" path="res://scenes/in_game/player_char/fsm/utils/fsm_stats.tres" id="3_lvexf"]
+[ext_resource type="Script" uid="uid://0qb4kkdjfqhg" path="res://scenes/in_game/player_char/fsm/states/Walk.cs" id="4_m6kff"]
+[ext_resource type="Script" uid="uid://dugdliey3xwgb" path="res://scenes/in_game/player_char/fsm/states/Idle.cs" id="4_sja5d"]
+[ext_resource type="Script" uid="uid://elgjk4210er3" path="res://scenes/in_game/player_char/fsm/states/Fall.cs" id="6_iaa7s"]
+[ext_resource type="Script" uid="uid://bg3dvssykh3t5" path="res://scenes/in_game/player_char/fsm/states/Jump.cs" id="7_sja5d"]
+[ext_resource type="Script" uid="uid://n2cqsklt50j2" path="res://scenes/in_game/player_char/fsm/states/Dash.cs" id="8_yk42j"]
+[ext_resource type="Script" uid="uid://b4brnsvfcwgbp" path="res://scenes/in_game/player_char/fsm/states/Sprint.cs" id="9_qlney"]
+[ext_resource type="Script" uid="uid://bqgwbm55mhhkc" path="res://scenes/in_game/player_char/fsm/states/Brake.cs" id="10_qlney"]
+[ext_resource type="Script" uid="uid://rg2d8fl3ypis" path="res://scenes/in_game/player_char/fsm/states/SprintJump.cs" id="11_ynsr2"]
+[ext_resource type="Script" uid="uid://cbmfumq0ym8sb" path="res://scenes/in_game/player_char/actions/PlayerActionManager.cs" id="12_qetm4"]
+[ext_resource type="Script" uid="uid://d1corcdd5sdn6" path="res://scenes/in_game/player_char/Crouch.cs" id="12_stv0n"]
+[ext_resource type="Script" uid="uid://dxayevw0yb0aa" path="res://scenes/in_game/player_char/actions/Melee.cs" id="13_2cg08"]
+[ext_resource type="Texture2D" uid="uid://bchvluyr0iv3l" path="res://resources/vfx/player/slash_vfx.tres" id="14_lvmcp"]
+[ext_resource type="Script" uid="uid://bj05xm1sgp024" path="res://scenes/in_game/player_char/actions/Parry.cs" id="14_r600y"]
+[ext_resource type="Script" uid="uid://chpc5y5bixgcs" path="res://scenes/in_game/player_char/actions/Spin.cs" id="15_lvmcp"]
+[ext_resource type="Texture2D" uid="uid://uwye4fiya8d1" path="res://resources/vfx/player/parry_vfx.tres" id="16_ahnmt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qetm4"]
+size = Vector2(230.75, 181)
+
+[sub_resource type="Animation" id="Animation_r600y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_lvmcp"]
+resource_name = "melee"
+length = 0.1
+step = 0.016666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.08333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"DeactivateHurtBox"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.016666668, 0.033333335, 0.05, 0.06666667, 0.083333336, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ahnmt"]
+_data = {
+&"RESET": SubResource("Animation_r600y"),
+&"start_attack": SubResource("Animation_lvmcp")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2cg08"]
+size = Vector2(138.75, 185)
+
+[sub_resource type="Animation" id="Animation_stv0n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ahnmt"]
+resource_name = "parry"
+length = 0.1
+step = 0.016666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"DeactivateHurtBox"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.016666668, 0.033333335, 0.05, 0.06666667, 0.083333336, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_stv0n"]
+_data = {
+&"RESET": SubResource("Animation_stv0n"),
+&"start_attack": SubResource("Animation_ahnmt")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_frrda"]
+size = Vector2(343, 149)
+
+[sub_resource type="Animation" id="Animation_l6axq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_kbw3p"]
+resource_name = "spin"
+length = 0.083333336
+step = 0.016666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.083333336),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.083333336),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"DeactivateHurtBox"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l6axq"]
+_data = {
+&"RESET": SubResource("Animation_l6axq"),
+&"start_attack": SubResource("Animation_kbw3p")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bx8n8"]
+size = Vector2(74.625656, 46.189163)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5h11f"]
+size = Vector2(64, 47)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_stv0n"]
+size = Vector2(64, 81)
+
+[node name="PlayerChar" type="CharacterBody2D" unique_id=1358731176]
+z_index = 2
+collision_mask = 256
+script = ExtResource("1_britx")
+
+[node name="FSM" type="Node" parent="." unique_id=1089784056 node_paths=PackedStringArray("Player", "ActionManager", "JumpBufferTimer", "KoyoteTimer", "DebugLabel_PlayerState", "DebugLabel_InputAxis")]
+script = ExtResource("2_t7lxb")
+Player = NodePath("..")
+ActionManager = NodePath("../ActionManager")
+Stats = ExtResource("3_lvexf")
+JumpBufferTimer = NodePath("JumpBufferTimer")
+KoyoteTimer = NodePath("KoyoteTimer")
+DebugLabel_PlayerState = NodePath("../Debug_PlayerState")
+DebugLabel_InputAxis = NodePath("../Debug_InputAxis")
+
+[node name="JumpBufferTimer" type="Timer" parent="FSM" unique_id=647243198]
+process_callback = 0
+wait_time = 0.1
+
+[node name="KoyoteTimer" type="Timer" parent="FSM" unique_id=454938557]
+process_callback = 0
+wait_time = 0.1
+
+[node name="Idle" type="Node" parent="FSM" unique_id=71213726]
+script = ExtResource("4_sja5d")
+
+[node name="Walk" type="Node" parent="FSM" unique_id=537438652]
+script = ExtResource("4_m6kff")
+
+[node name="Fall" type="Node" parent="FSM" unique_id=1969233970]
+script = ExtResource("6_iaa7s")
+
+[node name="Jump" type="Node" parent="FSM" unique_id=1541206462 node_paths=PackedStringArray("JumpDuration")]
+script = ExtResource("7_sja5d")
+JumpDuration = NodePath("JumpDuration")
+
+[node name="JumpDuration" type="Timer" parent="FSM/Jump" unique_id=1348357510]
+process_callback = 0
+wait_time = 0.4
+one_shot = true
+
+[node name="Dash" type="Node" parent="FSM" unique_id=1362575525 node_paths=PackedStringArray("DashDuration", "DashCooldown")]
+script = ExtResource("8_yk42j")
+DashDuration = NodePath("DashDuration")
+DashCooldown = NodePath("DashCooldown")
+
+[node name="DashDuration" type="Timer" parent="FSM/Dash" unique_id=202045892]
+process_callback = 0
+wait_time = 0.2
+one_shot = true
+
+[node name="DashCooldown" type="Timer" parent="FSM/Dash" unique_id=1884045242]
+process_callback = 0
+wait_time = 0.3
+one_shot = true
+
+[node name="Sprint" type="Node" parent="FSM" unique_id=351724454]
+script = ExtResource("9_qlney")
+
+[node name="Brake" type="Node" parent="FSM" unique_id=1083935709 node_paths=PackedStringArray("BrakeDuration")]
+script = ExtResource("10_qlney")
+BrakeDuration = NodePath("BrakeDuration")
+
+[node name="BrakeDuration" type="Timer" parent="FSM/Brake" unique_id=1798494742]
+process_callback = 0
+wait_time = 0.2
+one_shot = true
+
+[node name="SprintJump" type="Node" parent="FSM" unique_id=1088488716 node_paths=PackedStringArray("JumpDuration")]
+script = ExtResource("11_ynsr2")
+JumpDuration = NodePath("JumpDuration")
+
+[node name="JumpDuration" type="Timer" parent="FSM/SprintJump" unique_id=650451620]
+process_callback = 0
+wait_time = 0.4
+one_shot = true
+
+[node name="Crouch" type="Node" parent="FSM" unique_id=143432291 node_paths=PackedStringArray("UpperCollision", "UpperHandPosition", "LowerHandPosition", "Hand")]
+script = ExtResource("12_stv0n")
+UpperCollision = NodePath("../../UpperCollision")
+UpperHandPosition = NodePath("../../ActionManager/PlayerHand/UpperHandPosition")
+LowerHandPosition = NodePath("../../ActionManager/PlayerHand/LowerHandPosition")
+Hand = NodePath("../../ActionManager/PlayerHand/CurrentHandPosition")
+
+[node name="ActionManager" type="Node2D" parent="." unique_id=274473084 node_paths=PackedStringArray("Player", "FSM", "AfterCastDelayTimer", "Melee", "Parry", "ParryInAir", "PickUpArea", "CurrentHandPosition", "Hand")]
+script = ExtResource("12_qetm4")
+Player = NodePath("..")
+FSM = NodePath("../FSM")
+AfterCastDelayTimer = NodePath("AfterCastDelay")
+Melee = NodePath("Melee")
+Parry = NodePath("Parry")
+ParryInAir = NodePath("Spin")
+PickUpArea = NodePath("PlayerHand/PickUp")
+CurrentHandPosition = NodePath("PlayerHand/CurrentHandPosition")
+Hand = NodePath("PlayerHand")
+
+[node name="AfterCastDelay" type="Timer" parent="ActionManager" unique_id=143292579]
+process_callback = 0
+wait_time = 0.1
+one_shot = true
+
+[node name="Melee" type="Area2D" parent="ActionManager" unique_id=1064240840 node_paths=PackedStringArray("CooldownTimer", "animation")]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("13_2cg08")
+CooldownTimer = NodePath("CooldownTimer")
+animation = NodePath("AnimationPlayer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionManager/Melee" unique_id=572219459]
+position = Vector2(-114.625, -12.5)
+shape = SubResource("RectangleShape2D_qetm4")
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ActionManager/Melee" unique_id=1247982190]
+libraries/ = SubResource("AnimationLibrary_ahnmt")
+
+[node name="CooldownTimer" type="Timer" parent="ActionManager/Melee" unique_id=97941031]
+process_callback = 0
+wait_time = 0.3
+one_shot = true
+
+[node name="Sprite2D" type="Sprite2D" parent="ActionManager/Melee" unique_id=704331482]
+position = Vector2(-98.99999, -43)
+scale = Vector2(0.40234375, 0.40234375)
+texture = ExtResource("14_lvmcp")
+hframes = 8
+
+[node name="Parry" type="Area2D" parent="ActionManager" unique_id=523081963 node_paths=PackedStringArray("CooldownTimer", "animation")]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("14_r600y")
+CooldownTimer = NodePath("CooldownTimer")
+type = 2
+animation = NodePath("AnimationPlayer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionManager/Parry" unique_id=1222330814]
+position = Vector2(-82, -29)
+shape = SubResource("RectangleShape2D_2cg08")
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ActionManager/Parry" unique_id=1652951305]
+libraries/ = SubResource("AnimationLibrary_stv0n")
+
+[node name="CooldownTimer" type="Timer" parent="ActionManager/Parry" unique_id=321885227]
+process_callback = 0
+wait_time = 0.3
+one_shot = true
+
+[node name="Sprite2D" type="Sprite2D" parent="ActionManager/Parry" unique_id=90034783]
+position = Vector2(-84, -16)
+scale = Vector2(0.23339845, 0.23339845)
+texture = ExtResource("16_ahnmt")
+hframes = 8
+
+[node name="Spin" type="Area2D" parent="ActionManager" unique_id=1888429837 node_paths=PackedStringArray("CooldownTimer", "animation")]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("15_lvmcp")
+CooldownTimer = NodePath("CooldownTimer")
+type = 2
+animation = NodePath("AnimationPlayer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionManager/Spin" unique_id=616327748]
+position = Vector2(0, 18)
+shape = SubResource("RectangleShape2D_frrda")
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ActionManager/Spin" unique_id=1387753425]
+libraries/ = SubResource("AnimationLibrary_l6axq")
+
+[node name="CooldownTimer" type="Timer" parent="ActionManager/Spin" unique_id=1920389279]
+process_callback = 0
+wait_time = 0.3
+one_shot = true
+
+[node name="PlayerHand" type="Node2D" parent="ActionManager" unique_id=42032408]
+
+[node name="UpperHandPosition" type="Node2D" parent="ActionManager/PlayerHand" unique_id=1275858141]
+position = Vector2(-33, 1)
+
+[node name="LowerHandPosition" type="Node2D" parent="ActionManager/PlayerHand" unique_id=56848561]
+position = Vector2(-78.94635, 38.157074)
+
+[node name="CurrentHandPosition" type="Node2D" parent="ActionManager/PlayerHand" unique_id=1611371597]
+position = Vector2(-111.94635, 39.157074)
+
+[node name="PickUp" type="Area2D" parent="ActionManager/PlayerHand" unique_id=317320928]
+collision_layer = 0
+collision_mask = 16
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionManager/PlayerHand/PickUp" unique_id=405321703]
+position = Vector2(-50, 40)
+shape = SubResource("RectangleShape2D_bx8n8")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=419671816]
+custom_minimum_size = Vector2(64, 128)
+offset_left = -32.0
+offset_top = -64.0
+offset_right = 32.0
+offset_bottom = 64.0
+metadata/_edit_use_anchors_ = true
+
+[node name="LowerCollision" type="CollisionShape2D" parent="." unique_id=1400981806]
+position = Vector2(0, 40.5)
+shape = SubResource("RectangleShape2D_5h11f")
+
+[node name="UpperCollision" type="CollisionShape2D" parent="." unique_id=2081073087]
+position = Vector2(0, -23.5)
+shape = SubResource("RectangleShape2D_stv0n")
+
+[node name="Debug_PlayerState" type="Label" parent="." unique_id=81215083]
+z_index = 101
+offset_left = -42.0
+offset_top = 68.0
+offset_right = 47.0
+offset_bottom = 91.0
+text = "PlayerState"
+metadata/_edit_use_anchors_ = true
+
+[node name="Debug_InputAxis" type="Label" parent="." unique_id=195096781]
+z_index = 101
+offset_left = 40.0
+offset_top = -32.0
+offset_right = 114.0
+offset_bottom = -9.0
+text = "InputAxis"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="timeout" from="FSM/JumpBufferTimer" to="FSM" method="_on_jump_buffer_timer_timeout"]
+[connection signal="timeout" from="FSM/KoyoteTimer" to="FSM" method="_on_koyote_timer_timeout"]
+[connection signal="timeout" from="FSM/Jump/JumpDuration" to="FSM/Jump" method="_on_jump_duration_timeout"]
+[connection signal="timeout" from="FSM/Dash/DashDuration" to="FSM/Dash" method="_on_dash_duration_timeout"]
+[connection signal="timeout" from="FSM/Dash/DashCooldown" to="FSM/Dash" method="_on_dash_cooldown_timeout"]
+[connection signal="timeout" from="FSM/Brake/BrakeDuration" to="FSM/Brake" method="_on_brake_duration_timeout"]
+[connection signal="timeout" from="FSM/SprintJump/JumpDuration" to="FSM/SprintJump" method="_on_jump_duration_timeout"]
+[connection signal="timeout" from="ActionManager/AfterCastDelay" to="ActionManager" method="_on_after_cast_delay_timeout"]
+[connection signal="timeout" from="ActionManager/Melee/CooldownTimer" to="ActionManager/Melee" method="_on_cooldown_timer_timeout"]
+[connection signal="timeout" from="ActionManager/Parry/CooldownTimer" to="ActionManager/Parry" method="_on_cooldown_timer_timeout"]

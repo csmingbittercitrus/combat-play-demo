@@ -1,0 +1,190 @@
+[gd_scene format=3 uid="uid://cvghoc6a4c00l"]
+
+[ext_resource type="Script" uid="uid://bjk3m20mm2kbo" path="res://ui/settings/controls/Controls_Keyboard.cs" id="1_8sqap"]
+[ext_resource type="PackedScene" uid="uid://c1jjbsf564cgt" path="res://ui/settings/utils/settings_ui_base.tscn" id="2_je22l"]
+
+[node name="Controls_Keyboard" type="VBoxContainer" unique_id=617985259]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8sqap")
+
+[node name="Up" parent="." unique_id=1024141612 instance=ExtResource("2_je22l")]
+layout_mode = 2
+
+[node name="Label" parent="Up" index="0" unique_id=170105681]
+text = "settings_controls_up"
+
+[node name="Down" parent="." unique_id=1577457045 instance=ExtResource("2_je22l")]
+layout_mode = 2
+
+[node name="Label" parent="Down" index="0" unique_id=170105681]
+text = "settings_controls_down"
+
+[node name="Left" parent="." unique_id=1533695394 instance=ExtResource("2_je22l")]
+layout_mode = 2
+
+[node name="Label" parent="Left" index="0" unique_id=170105681]
+text = "settings_controls_left"
+
+[node name="Right" parent="." unique_id=158741584 instance=ExtResource("2_je22l")]
+layout_mode = 2
+
+[node name="Label" parent="Right" index="0" unique_id=170105681]
+text = "settings_controls_right"
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1757387517]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+
+[node name="Jump" parent="." unique_id=36272785 instance=ExtResource("2_je22l")]
+layout_mode = 2
+
+[node name="Label" parent="Jump" index="0" unique_id=170105681]
+text = "settings_controls_jump"
+
+[node name="Attack" parent="." unique_id=1540205202 instance=ExtResource("2_je22l")]
+layout_mode = 2
+
+[node name="Label" parent="Attack" index="0" unique_id=170105681]
+text = "settings_controls_attack"
+
+[node name="Dash" parent="." unique_id=1733583737 instance=ExtResource("2_je22l")]
+layout_mode = 2
+
+[node name="Label" parent="Dash" index="0" unique_id=170105681]
+text = "settings_controls_dash"
+
+[node name="Potion" parent="." unique_id=102695475 instance=ExtResource("2_je22l")]
+layout_mode = 2
+
+[node name="Label" parent="Potion" index="0" unique_id=170105681]
+text = "settings_controls_potion"
+
+[node name="Parry" parent="." unique_id=1430249244 instance=ExtResource("2_je22l")]
+layout_mode = 2
+
+[node name="Label" parent="Parry" index="0" unique_id=170105681]
+text = "settings_controls_parry"
+
+[node name="Throw" parent="." unique_id=1129213088 instance=ExtResource("2_je22l")]
+layout_mode = 2
+
+[node name="Label" parent="Throw" index="0" unique_id=170105681]
+text = "settings_controls_throw"
+
+[node name="FastMap" parent="." unique_id=274304167 instance=ExtResource("2_je22l")]
+layout_mode = 2
+
+[node name="Label" parent="FastMap" index="0" unique_id=170105681]
+text = "settings_controls_fast_map"
+
+[node name="MarginContainer2" type="MarginContainer" parent="." unique_id=1586405302]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+
+[node name="CameraUp" parent="." unique_id=1011818530 instance=ExtResource("2_je22l")]
+layout_mode = 2
+
+[node name="Label" parent="CameraUp" index="0" unique_id=170105681]
+text = "settings_controls_camera_up"
+
+[node name="CameraDown" parent="." unique_id=2024906486 instance=ExtResource("2_je22l")]
+layout_mode = 2
+
+[node name="Label" parent="CameraDown" index="0" unique_id=170105681]
+text = "settings_controls_camera_down"
+
+[node name="CameraLeft" parent="." unique_id=1087078897 instance=ExtResource("2_je22l")]
+layout_mode = 2
+
+[node name="Label" parent="CameraLeft" index="0" unique_id=170105681]
+text = "settings_controls_camera_left"
+
+[node name="CameraRight" parent="." unique_id=432327330 instance=ExtResource("2_je22l")]
+layout_mode = 2
+
+[node name="Label" parent="CameraRight" index="0" unique_id=170105681]
+text = "settings_controls_camera_right"
+
+[node name="MarginContainer3" type="MarginContainer" parent="." unique_id=1748194101]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+
+[node name="UITabLeft" parent="." unique_id=1409947611 instance=ExtResource("2_je22l")]
+layout_mode = 2
+
+[node name="Label" parent="UITabLeft" index="0" unique_id=170105681]
+text = "settings_controls_ui_tab_left"
+
+[node name="UITabRight" parent="." unique_id=608548489 instance=ExtResource("2_je22l")]
+layout_mode = 2
+
+[node name="Label" parent="UITabRight" index="0" unique_id=170105681]
+text = "settings_controls_ui_tab_right"
+
+[node name="MarginContainer4" type="MarginContainer" parent="." unique_id=561101016]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+
+[node name="Menu" parent="." unique_id=2059299948 instance=ExtResource("2_je22l")]
+layout_mode = 2
+
+[node name="Label" parent="Menu" index="0" unique_id=170105681]
+text = "settings_controls_menu"
+
+[node name="Menu_Map" parent="." unique_id=174464504 instance=ExtResource("2_je22l")]
+layout_mode = 2
+
+[node name="Label" parent="Menu_Map" index="0" unique_id=170105681]
+text = "settings_controls_menu_map"
+
+[node name="Menu_Equipment" parent="." unique_id=1071144511 instance=ExtResource("2_je22l")]
+layout_mode = 2
+
+[node name="Label" parent="Menu_Equipment" index="0" unique_id=170105681]
+text = "settings_controls_menu_equipment"
+
+[node name="Menu_Inventory" parent="." unique_id=318950906 instance=ExtResource("2_je22l")]
+layout_mode = 2
+
+[node name="Label" parent="Menu_Inventory" index="0" unique_id=170105681]
+text = "settings_controls_menu_inventory"
+
+[node name="Menu_Quest" parent="." unique_id=1680780286 instance=ExtResource("2_je22l")]
+layout_mode = 2
+
+[node name="Label" parent="Menu_Quest" index="0" unique_id=170105681]
+text = "settings_controls_menu_quest"
+
+[node name="Menu_Dex" parent="." unique_id=1544185867 instance=ExtResource("2_je22l")]
+layout_mode = 2
+
+[node name="Label" parent="Menu_Dex" index="0" unique_id=170105681]
+text = "settings_controls_menu_dex"
+
+[editable path="Up"]
+[editable path="Down"]
+[editable path="Left"]
+[editable path="Right"]
+[editable path="Jump"]
+[editable path="Attack"]
+[editable path="Dash"]
+[editable path="Potion"]
+[editable path="Parry"]
+[editable path="Throw"]
+[editable path="FastMap"]
+[editable path="CameraUp"]
+[editable path="CameraDown"]
+[editable path="CameraLeft"]
+[editable path="CameraRight"]
+[editable path="UITabLeft"]
+[editable path="UITabRight"]
+[editable path="Menu"]
+[editable path="Menu_Map"]
+[editable path="Menu_Equipment"]
+[editable path="Menu_Inventory"]
+[editable path="Menu_Quest"]
+[editable path="Menu_Dex"]

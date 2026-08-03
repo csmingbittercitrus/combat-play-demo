@@ -1,0 +1,510 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="CombatPlayDemo"
+config/version="1.0"
+run/main_scene="uid://dr6rosji01v5v"
+config/features=PackedStringArray("4.7", "C#", "Forward Plus")
+
+[audio]
+
+buses/default_bus_layout="uid://doxasw3y24a55"
+
+[autoload]
+
+SettingsManager="*uid://b0u88wmcrfxk8"
+InputManager="*uid://dmt4ramonrvr5"
+CombatManager="*uid://c4plinoly6wl4"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/mode=3
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
+[dotnet]
+
+project/assembly_name="CombatPlayDemo"
+
+[editor_plugins]
+
+enabled=PackedStringArray()
+
+[input]
+
+ui_accept={
+"deadzone": 0.5,
+"events": []
+}
+ui_select={
+"deadzone": 0.5,
+"events": []
+}
+ui_cancel={
+"deadzone": 0.5,
+"events": []
+}
+ui_close_dialog={
+"deadzone": 0.5,
+"events": []
+}
+ui_close_dialog.macos={
+"deadzone": 0.5,
+"events": []
+}
+ui_focus_next={
+"deadzone": 0.5,
+"events": []
+}
+ui_focus_prev={
+"deadzone": 0.5,
+"events": []
+}
+ui_left={
+"deadzone": 0.5,
+"events": []
+}
+ui_right={
+"deadzone": 0.5,
+"events": []
+}
+ui_up={
+"deadzone": 0.5,
+"events": []
+}
+ui_down={
+"deadzone": 0.5,
+"events": []
+}
+ui_page_up={
+"deadzone": 0.5,
+"events": []
+}
+ui_page_down={
+"deadzone": 0.5,
+"events": []
+}
+ui_home={
+"deadzone": 0.5,
+"events": []
+}
+ui_end={
+"deadzone": 0.5,
+"events": []
+}
+ui_cut={
+"deadzone": 0.5,
+"events": []
+}
+ui_copy={
+"deadzone": 0.5,
+"events": []
+}
+ui_focus_mode={
+"deadzone": 0.5,
+"events": []
+}
+ui_paste={
+"deadzone": 0.5,
+"events": []
+}
+ui_undo={
+"deadzone": 0.5,
+"events": []
+}
+ui_redo={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_completion_query={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_completion_accept={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_completion_replace={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_newline={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_newline_blank={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_newline_above={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_indent={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_dedent={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_backspace={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_backspace_word={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_backspace_word.macos={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_backspace_all_to_left.macos={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_delete={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_delete_word={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_delete_word.macos={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_delete_all_to_right.macos={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_caret_left={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_caret_word_left={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_caret_word_left.macos={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_caret_right={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_caret_word_right={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_caret_word_right.macos={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_caret_up={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_caret_down={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_caret_line_start={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_caret_line_start.macos={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_caret_line_end={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_caret_line_end.macos={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_caret_page_up={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_caret_page_down={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_caret_document_start={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_caret_document_start.macos={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_caret_document_end={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_caret_document_end.macos={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_caret_add_below={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_caret_add_below.macos={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_caret_add_above={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_caret_add_above.macos={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_scroll_up={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_scroll_up.macos={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_scroll_down={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_scroll_down.macos={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_select_all={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_select_word_under_caret={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_select_word_under_caret.macos={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_add_selection_for_next_occurrence={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_skip_selection_for_next_occurrence={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_clear_carets_and_selection={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_toggle_insert_mode={
+"deadzone": 0.5,
+"events": []
+}
+ui_menu={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_submit={
+"deadzone": 0.5,
+"events": []
+}
+ui_unicode_start={
+"deadzone": 0.5,
+"events": []
+}
+ui_graph_duplicate={
+"deadzone": 0.5,
+"events": []
+}
+ui_graph_delete={
+"deadzone": 0.5,
+"events": []
+}
+ui_graph_follow_left={
+"deadzone": 0.5,
+"events": []
+}
+ui_graph_follow_left.macos={
+"deadzone": 0.5,
+"events": []
+}
+ui_graph_follow_right={
+"deadzone": 0.5,
+"events": []
+}
+ui_graph_follow_right.macos={
+"deadzone": 0.5,
+"events": []
+}
+ui_filedialog_delete={
+"deadzone": 0.5,
+"events": []
+}
+ui_filedialog_up_one_level={
+"deadzone": 0.5,
+"events": []
+}
+ui_filedialog_refresh={
+"deadzone": 0.5,
+"events": []
+}
+ui_filedialog_show_hidden={
+"deadzone": 0.5,
+"events": []
+}
+ui_filedialog_find={
+"deadzone": 0.5,
+"events": []
+}
+ui_filedialog_focus_path={
+"deadzone": 0.5,
+"events": []
+}
+ui_filedialog_focus_path.macos={
+"deadzone": 0.5,
+"events": []
+}
+ui_swap_input_direction={
+"deadzone": 0.5,
+"events": []
+}
+ui_colorpicker_delete_preset={
+"deadzone": 0.5,
+"events": []
+}
+bittercitrus_ui_tab_left={
+"deadzone": 0.2,
+"events": []
+}
+bittercitrus_ui_tab_right={
+"deadzone": 0.2,
+"events": []
+}
+bittercitrus_up={
+"deadzone": 0.2,
+"events": []
+}
+bittercitrus_down={
+"deadzone": 0.2,
+"events": []
+}
+bittercitrus_left={
+"deadzone": 0.2,
+"events": []
+}
+bittercitrus_right={
+"deadzone": 0.2,
+"events": []
+}
+bittercitrus_camera_up={
+"deadzone": 0.2,
+"events": []
+}
+bittercitrus_camera_down={
+"deadzone": 0.2,
+"events": []
+}
+bittercitrus_camera_left={
+"deadzone": 0.2,
+"events": []
+}
+bittercitrus_camera_right={
+"deadzone": 0.2,
+"events": []
+}
+bittercitrus_pause={
+"deadzone": 0.2,
+"events": []
+}
+bittercitrus_menu={
+"deadzone": 0.2,
+"events": []
+}
+bittercitrus_menu_map={
+"deadzone": 0.2,
+"events": []
+}
+bittercitrus_menu_equipment={
+"deadzone": 0.2,
+"events": []
+}
+bittercitrus_menu_inventory={
+"deadzone": 0.2,
+"events": []
+}
+bittercitrus_menu_quest={
+"deadzone": 0.2,
+"events": []
+}
+bittercitrus_menu_dex={
+"deadzone": 0.2,
+"events": []
+}
+bittercitrus_fast_map={
+"deadzone": 0.2,
+"events": []
+}
+bittercitrus_jump={
+"deadzone": 0.2,
+"events": []
+}
+bittercitrus_attack={
+"deadzone": 0.2,
+"events": []
+}
+bittercitrus_smash={
+"deadzone": 0.2,
+"events": []
+}
+bittercitrus_dash={
+"deadzone": 0.2,
+"events": []
+}
+bittercitrus_parry={
+"deadzone": 0.2,
+"events": []
+}
+bittercitrus_throw={
+"deadzone": 0.2,
+"events": []
+}
+bittercitrus_potion={
+"deadzone": 0.2,
+"events": []
+}
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://resources/translations/translation_title_screen.en.translation", "res://resources/translations/translation_title_screen.kr.translation")
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+2d/default_gravity=6000.0
+
+[rendering]
+
+rendering_device/driver.windows="d3d12"

@@ -1,0 +1,123 @@
+[gd_scene format=3 uid="uid://cq8ls38iyaoac"]
+
+[ext_resource type="Script" uid="uid://8son4olim678" path="res://ui/settings/ParentUI_Settings.cs" id="1_yeedv"]
+[ext_resource type="LabelSettings" uid="uid://ds3r0gq6yy73j" path="res://ui/utils/ui_top_text.tres" id="2_368dc"]
+[ext_resource type="PackedScene" uid="uid://dpx85hoqgroxs" path="res://ui/settings/utils/settings_tab.tscn" id="3_qxlps"]
+[ext_resource type="PackedScene" uid="uid://cuiuypoq1r27c" path="res://ui/settings/gameplay/setttings_gameplay.tscn" id="4_18eqp"]
+[ext_resource type="PackedScene" uid="uid://wq2ndpsuowlh" path="res://ui/utils/ui_selection/UISelection.tscn" id="4_v4kcy"]
+[ext_resource type="PackedScene" uid="uid://cw61eocu3eqyl" path="res://ui/settings/graphics/settings_graphics.tscn" id="5_8scm3"]
+[ext_resource type="PackedScene" uid="uid://chgh7o5yu7du3" path="res://ui/settings/sounds/settings_sounds.tscn" id="6_xo64b"]
+[ext_resource type="PackedScene" uid="uid://cq6xhhtilmpe" path="res://ui/settings/controls/settings_controls.tscn" id="7_xo64b"]
+
+[node name="TopUI_Settings" type="Control" unique_id=2138487004 node_paths=PackedStringArray("Back", "Tab_Gameplay", "Tab_Graphics", "Tab_Sounds", "Tab_Controls", "Gameplay", "Graphics", "Sounds", "Controls")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yeedv")
+Back = NodePath("VBoxContainer/Back")
+Tab_Gameplay = NodePath("VBoxContainer/Tabs/Gameplay")
+Tab_Graphics = NodePath("VBoxContainer/Tabs/Graphics")
+Tab_Sounds = NodePath("VBoxContainer/Tabs/Sounds")
+Tab_Controls = NodePath("VBoxContainer/Tabs/Controls")
+Gameplay = NodePath("VBoxContainer/Clipper/ScrollContainer/MarginContainer/Setttings_Gameplay")
+Graphics = NodePath("VBoxContainer/Clipper/ScrollContainer/MarginContainer/Settings_Graphics")
+Sounds = NodePath("VBoxContainer/Clipper/ScrollContainer/MarginContainer/Settings_Sounds")
+Controls = NodePath("VBoxContainer/Clipper/ScrollContainer/MarginContainer/SettingsControls")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=289915476]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer" unique_id=1552418525]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=370030471]
+layout_mode = 2
+text = "header_settings"
+label_settings = ExtResource("2_368dc")
+horizontal_alignment = 1
+
+[node name="Tabs" type="HBoxContainer" parent="VBoxContainer" unique_id=1141289413]
+layout_mode = 2
+alignment = 1
+
+[node name="Gameplay" parent="VBoxContainer/Tabs" unique_id=217005152 instance=ExtResource("3_qxlps")]
+layout_mode = 2
+
+[node name="Label" parent="VBoxContainer/Tabs/Gameplay" index="1" unique_id=336683844]
+text = "settings_tab_gameplay"
+
+[node name="Graphics" parent="VBoxContainer/Tabs" unique_id=32248163 instance=ExtResource("3_qxlps")]
+layout_mode = 2
+
+[node name="Label" parent="VBoxContainer/Tabs/Graphics" index="1" unique_id=336683844]
+text = "settings_tab_graphics"
+
+[node name="Sounds" parent="VBoxContainer/Tabs" unique_id=1080255101 instance=ExtResource("3_qxlps")]
+layout_mode = 2
+
+[node name="Label" parent="VBoxContainer/Tabs/Sounds" index="1" unique_id=336683844]
+text = "settings_tab_sounds"
+
+[node name="Controls" parent="VBoxContainer/Tabs" unique_id=18721341 instance=ExtResource("3_qxlps")]
+layout_mode = 2
+
+[node name="Label" parent="VBoxContainer/Tabs/Controls" index="1" unique_id=336683844]
+text = "settings_tab_controls"
+
+[node name="Clipper" type="Control" parent="VBoxContainer" unique_id=2020669124]
+custom_minimum_size = Vector2(0, 780)
+custom_maximum_size = Vector2(-1, 780)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Clipper" unique_id=684986456]
+custom_minimum_size = Vector2(1280, 0)
+custom_maximum_size = Vector2(920, -1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Clipper/ScrollContainer" unique_id=1134628815]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Setttings_Gameplay" parent="VBoxContainer/Clipper/ScrollContainer/MarginContainer" unique_id=1890447846 instance=ExtResource("4_18eqp")]
+layout_mode = 2
+
+[node name="Settings_Graphics" parent="VBoxContainer/Clipper/ScrollContainer/MarginContainer" unique_id=580258951 instance=ExtResource("5_8scm3")]
+visible = false
+layout_mode = 2
+
+[node name="Settings_Sounds" parent="VBoxContainer/Clipper/ScrollContainer/MarginContainer" unique_id=945784655 instance=ExtResource("6_xo64b")]
+visible = false
+layout_mode = 2
+
+[node name="SettingsControls" parent="VBoxContainer/Clipper/ScrollContainer/MarginContainer" unique_id=1425449309 instance=ExtResource("7_xo64b")]
+visible = false
+layout_mode = 2
+
+[node name="Back" parent="VBoxContainer" unique_id=1740037921 instance=ExtResource("4_v4kcy")]
+layout_mode = 2
+
+[node name="Label" parent="VBoxContainer/Back/HBoxContainer" parent_id_path=PackedInt32Array(1740037921, 760398467) index="1" unique_id=1658772710]
+text = "Back"
+
+[editable path="VBoxContainer/Tabs/Gameplay"]
+[editable path="VBoxContainer/Tabs/Graphics"]
+[editable path="VBoxContainer/Tabs/Sounds"]
+[editable path="VBoxContainer/Tabs/Controls"]
+[editable path="VBoxContainer/Back"]

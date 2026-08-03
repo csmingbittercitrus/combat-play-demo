@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://ck528vdtevjyj"]
+
+[ext_resource type="Script" uid="uid://dstwq17ii5ius" path="res://scenes/in_game/entities/projectiles/projectile_test_2/ProjectileTest2.cs" id="1_0cd3y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pk3d4"]
+size = Vector2(40, 40)
+
+[node name="ProjectileTest2" type="CharacterBody2D" unique_id=498666515]
+collision_layer = 4
+collision_mask = 256
+script = ExtResource("1_0cd3y")
+LaunchSpeed = 1000.0
+Accel_X = 20.0
+BounceType = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=738554778]
+shape = SubResource("RectangleShape2D_pk3d4")
+debug_color = Color(0.31176525, 0.6267239, 1.92523e-07, 0.41960785)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=45282349]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D" unique_id=775194427]
+shape = SubResource("RectangleShape2D_pk3d4")
+debug_color = Color(0.31176525, 0.6267239, 1.92523e-07, 0.41960785)

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bxmtqijur515w"]
+
+[ext_resource type="Script" uid="uid://b72e5j8kv62m1" path="res://ui/settings/graphics/ResolutionOptionButton.cs" id="1_q03vv"]
+
+[node name="ResolutionOptionButton" type="OptionButton" unique_id=312258336]
+custom_minimum_size = Vector2(120, 40)
+script = ExtResource("1_q03vv")
+
+[connection signal="item_selected" from="." to="." method="_on_item_selected"]

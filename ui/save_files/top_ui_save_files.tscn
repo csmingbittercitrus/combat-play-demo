@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://d3p15ss0xghnu"]
+
+[ext_resource type="Script" uid="uid://b0qwxldhi86tl" path="res://ui/save_files/ParentUI_SaveFiles.cs" id="1_g2ryv"]
+[ext_resource type="LabelSettings" uid="uid://0wlq28smxkdj" path="res://ui/save_files/temp_save_files.tres" id="2_7f0yv"]
+[ext_resource type="PackedScene" uid="uid://wq2ndpsuowlh" path="res://ui/utils/ui_selection/UISelection.tscn" id="2_a4am2"]
+
+[node name="TopUi_SaveFiles" type="Control" unique_id=579501167 node_paths=PackedStringArray("PlayTest1", "Back", "UIToGiveInitialFocus")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g2ryv")
+PlayTest1 = NodePath("VBoxContainer/PlayTest1")
+Back = NodePath("VBoxContainer/Back")
+UIToGiveInitialFocus = NodePath("VBoxContainer/PlayTest1")
+FadeInDuration = 0.5
+FadeOutDuration = 0.2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1049510080]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=236245249]
+layout_mode = 2
+text = "title_header_save_files"
+label_settings = ExtResource("2_7f0yv")
+horizontal_alignment = 1
+
+[node name="PlayTest1" parent="VBoxContainer" unique_id=1740037921 instance=ExtResource("2_a4am2")]
+layout_mode = 2
+
+[node name="Label" parent="VBoxContainer/PlayTest1/HBoxContainer" parent_id_path=PackedInt32Array(1740037921, 760398467) index="1" unique_id=1658772710]
+text = "save_files_selection_play_test1"
+
+[node name="Back" parent="VBoxContainer" unique_id=859754220 instance=ExtResource("2_a4am2")]
+layout_mode = 2
+
+[node name="Label" parent="VBoxContainer/Back/HBoxContainer" parent_id_path=PackedInt32Array(859754220, 760398467) index="1" unique_id=1658772710]
+text = "settings_common_back"
+
+[editable path="VBoxContainer/PlayTest1"]
+[editable path="VBoxContainer/Back"]

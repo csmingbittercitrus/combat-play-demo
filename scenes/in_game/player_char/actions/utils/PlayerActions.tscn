@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cbqsnojojprfa"]
+
+[sub_resource type="Animation" id="Animation_dcueg"]
+resource_name = "start_attack"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i8fsb"]
+_data = {
+&"start_attack": SubResource("Animation_dcueg")
+}
+
+[node name="PlayerActions" type="Area2D" unique_id=1456507434]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1351519201]
+disabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=986362437]
+
+[node name="CooldownTimer" type="Timer" parent="." unique_id=2012020802]
+process_callback = 0
+wait_time = 0.3
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1551660119]
+libraries/ = SubResource("AnimationLibrary_i8fsb")

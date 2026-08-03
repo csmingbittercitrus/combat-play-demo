@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cb8bsnu7sfp8t"]
+
+[ext_resource type="Script" uid="uid://d0u65es8gf1n3" path="res://ui/settings/graphics/FullscreenCheckbox.cs" id="1_vsu86"]
+
+[node name="FullscreenCheckbox" type="CheckBox" unique_id=1261496816]
+script = ExtResource("1_vsu86")
+
+[connection signal="toggled" from="." to="." method="_on_toggled"]

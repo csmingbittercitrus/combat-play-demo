@@ -1,0 +1,53 @@
+keys,en,kr
+title_selection_start_game,Start Game,게임 시작
+title_selection_settings,Settings,설정
+title_selection_quit,Quit,게임 종료
+header_save_files,Choose Save File,세이브 파일 선택
+save_files_selection_play_test1,Play Test 1,플레이 테스트 1
+header_settings,Settings,설정
+settings_tab_gameplay,Gameplay,게임플레이
+settings_tab_graphics,Graphics,그래픽
+settings_tab_sounds,Sounds,소리
+settings_tab_controls,Controls,조작
+settings_gameplay_language,Language,언어
+settings_gameplay_enable_screen_shake,Enable ScreenShake,화면 흔들림 허용
+settings_gameplay_always_show_hud,Always Show HUD,HUD 항상 표시
+settings_graphics_full_screen,Fullscreen,전체화면
+settings_graphics_windowed_resolution,Windowed Resoution,창 크기
+settings_graphics_vsync,Vsync,수직동기화
+settings_graphics_fps_limit,FPS Limit,FPS 제한
+settings_graphics_msaa,MSAA,MSAA
+settings_graphics_brightness,Brightness,밝기
+settings_sounds_master,Master,전체
+settings_sounds_music,Music,음악
+settings_sounds_sfx,SFX,효과음
+settings_sounds_environments,Environments,환경음
+settings_sounds_voice,Voice,대화
+settings_sounds_mute_in_background,Mute In Background,백그라운드에서 음소거
+settings_allow_automatic_input_mode_change,Allow Automatic Input Mode Change,자동으로 컨트롤러/키보드 입력 모드 변경
+settings_controls_bindings,Bindings,키 설정
+settings_controls_use_nintendo_layout,Use Nintendo Layout,닌텐도 레이아웃 사용
+settings_controls_enable_vibration,Vibration,컨트롤러 진동
+settings_controls_jump,Jump,점프
+settings_controls_attack,Attack,공격
+settings_controls_dash,Dash,대쉬
+settings_controls_potion,Potion,포션
+settings_controls_parry,Parry,패링
+settings_controls_throw,Throw,던지기
+settings_controls_fast_map,Fast Map,꾹 눌러 지도 보기
+settings_controls_ui_tab_left,UI Tab left,UI 왼쪽 탭
+settings_controls_ui_tab_right,UI Tab Right,UI 오른쪽 탭
+settings_controls_up,Up,위
+settings_controls_down,Down,아래
+settings_controls_left,Left,왼쪽
+settings_controls_right,Right,오른쪽
+settings_controls_camera_up,Camera Up,카메라 위
+settings_controls_camera_down,Camera Down,카메라 아래
+settings_controls_camera_left,Camera Left,카메라 왼쪽
+settings_controls_camera_right,Camera Right,카메라 오른쪽
+settings_controls_menu,Menu,메뉴
+settings_controls_menu_map,Map,지도
+settings_controls_menu_equipment,Equipment,장비
+settings_controls_menu_inventory,Inventory,인벤토리
+settings_controls_menu_quest,Quest,퀘스트
+settings_controls_menu_dex,Dex,도감

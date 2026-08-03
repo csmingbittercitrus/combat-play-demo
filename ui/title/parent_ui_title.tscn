@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://cin8wwvquooaf"]
+
+[ext_resource type="Script" uid="uid://d2den7fim1b8k" path="res://ui/title/ParentUI_Title.cs" id="1_ekxvd"]
+[ext_resource type="PackedScene" uid="uid://wq2ndpsuowlh" path="res://ui/utils/ui_selection/UISelection.tscn" id="2_am7av"]
+[ext_resource type="LabelSettings" uid="uid://b3sjslbot85uu" path="res://ui/title/game_title.tres" id="2_lkiw5"]
+
+[node name="TopUI_Title" type="Control" unique_id=917215898 node_paths=PackedStringArray("StartGame", "Settings", "Quit", "UIToGiveInitialFocus")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ekxvd")
+StartGame = NodePath("VBoxContainer/StartGame")
+Settings = NodePath("VBoxContainer/Settings")
+Quit = NodePath("VBoxContainer/Quit")
+UIToGiveInitialFocus = NodePath("VBoxContainer/StartGame")
+FadeInDuration = 1.0
+FadeOutDuration = 0.2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2031833716]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=1710996063]
+layout_mode = 2
+text = "Game
+Title"
+label_settings = ExtResource("2_lkiw5")
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer" unique_id=1767733984]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="StartGame" parent="VBoxContainer" unique_id=1740037921 instance=ExtResource("2_am7av")]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../Settings")
+
+[node name="Label" parent="VBoxContainer/StartGame/HBoxContainer" parent_id_path=PackedInt32Array(1740037921, 760398467) index="1" unique_id=1658772710]
+text = "title_selection_start_game"
+
+[node name="Settings" parent="VBoxContainer" unique_id=1245984591 instance=ExtResource("2_am7av")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../StartGame")
+focus_neighbor_bottom = NodePath("../Quit")
+
+[node name="Label" parent="VBoxContainer/Settings/HBoxContainer" parent_id_path=PackedInt32Array(1245984591, 760398467) index="1" unique_id=1658772710]
+text = "title_selection_settings"
+
+[node name="Quit" parent="VBoxContainer" unique_id=49626542 instance=ExtResource("2_am7av")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Settings")
+
+[node name="Label" parent="VBoxContainer/Quit/HBoxContainer" parent_id_path=PackedInt32Array(49626542, 760398467) index="1" unique_id=1658772710]
+text = "title_selection_quit"
+
+[editable path="VBoxContainer/StartGame"]
+[editable path="VBoxContainer/Settings"]
+[editable path="VBoxContainer/Quit"]

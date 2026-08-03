@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://cuiuypoq1r27c"]
+
+[ext_resource type="Script" uid="uid://607r2egi0esd" path="res://ui/utils/ParentUI.cs" id="1_pcs7e"]
+[ext_resource type="PackedScene" uid="uid://c1jjbsf564cgt" path="res://ui/settings/utils/settings_ui_base.tscn" id="2_bxpw6"]
+[ext_resource type="PackedScene" uid="uid://dej1tm388o815" path="res://ui/settings/gameplay/language_option_button.tscn" id="3_yjcud"]
+
+[node name="Setttings_Gameplay" type="VBoxContainer" unique_id=1890447846]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pcs7e")
+
+[node name="Language" parent="." unique_id=1024141612 instance=ExtResource("2_bxpw6")]
+layout_mode = 2
+
+[node name="Label" parent="Language" index="0" unique_id=170105681]
+text = "settings_gameplay_language"
+
+[node name="LanguageOptionButton" parent="Language/MarginContainer2" parent_id_path=PackedInt32Array(1024141612, 1957289341) index="0" unique_id=231158427 instance=ExtResource("3_yjcud")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="EnableScreenShake" parent="." unique_id=1172488569 instance=ExtResource("2_bxpw6")]
+layout_mode = 2
+
+[node name="Label" parent="EnableScreenShake" index="0" unique_id=170105681]
+text = "settings_gameplay_enable_screen_shake"
+
+[node name="AlwaysShowHUD" parent="." unique_id=1034115202 instance=ExtResource("2_bxpw6")]
+layout_mode = 2
+
+[node name="Label" parent="AlwaysShowHUD" index="0" unique_id=170105681]
+text = "settings_gameplay_always_show_hud"
+
+[editable path="Language"]
+[editable path="EnableScreenShake"]
+[editable path="AlwaysShowHUD"]

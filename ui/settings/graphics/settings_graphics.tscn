@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://cw61eocu3eqyl"]
+
+[ext_resource type="PackedScene" uid="uid://c1jjbsf564cgt" path="res://ui/settings/utils/settings_ui_base.tscn" id="1_3g3bo"]
+[ext_resource type="Script" uid="uid://607r2egi0esd" path="res://ui/utils/ParentUI.cs" id="1_jb7ol"]
+[ext_resource type="PackedScene" uid="uid://bxmtqijur515w" path="res://ui/settings/graphics/resolution_option_button.tscn" id="3_0mck3"]
+[ext_resource type="PackedScene" uid="uid://cb8bsnu7sfp8t" path="res://ui/settings/graphics/fullscreen_checkbox.tscn" id="3_kfwov"]
+
+[node name="Settings_Graphics" type="VBoxContainer" unique_id=580258951]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jb7ol")
+
+[node name="FullScreen" parent="." unique_id=1024141612 instance=ExtResource("1_3g3bo")]
+layout_mode = 2
+
+[node name="Label" parent="FullScreen" index="0" unique_id=170105681]
+text = "settings_graphics_full_screen"
+
+[node name="FullscreenCheckbox" parent="FullScreen/MarginContainer2" parent_id_path=PackedInt32Array(1024141612, 1957289341) index="0" unique_id=1261496816 instance=ExtResource("3_kfwov")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="WindowedResolution" parent="." unique_id=211427276 instance=ExtResource("1_3g3bo")]
+layout_mode = 2
+
+[node name="Label" parent="WindowedResolution" index="0" unique_id=170105681]
+text = "settings_graphics_windowed_resolution"
+
+[node name="ResolutionOptionButton" parent="WindowedResolution/MarginContainer2" parent_id_path=PackedInt32Array(211427276, 1957289341) index="0" unique_id=312258336 instance=ExtResource("3_0mck3")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VSync" parent="." unique_id=1231357706 instance=ExtResource("1_3g3bo")]
+layout_mode = 2
+
+[node name="Label" parent="VSync" index="0" unique_id=170105681]
+text = "settings_graphics_vsync"
+
+[node name="FPSLimit" parent="." unique_id=500959876 instance=ExtResource("1_3g3bo")]
+layout_mode = 2
+
+[node name="Label" parent="FPSLimit" index="0" unique_id=170105681]
+text = "settings_graphics_fps_limit"
+
+[node name="MSAA" parent="." unique_id=1717172003 instance=ExtResource("1_3g3bo")]
+layout_mode = 2
+
+[node name="Label" parent="MSAA" index="0" unique_id=170105681]
+text = "settings_graphics_msaa"
+
+[node name="Brightness" parent="." unique_id=1846761775 instance=ExtResource("1_3g3bo")]
+layout_mode = 2
+
+[node name="Label" parent="Brightness" index="0" unique_id=170105681]
+text = "settings_graphics_brightness"
+
+[editable path="FullScreen"]
+[editable path="WindowedResolution"]
+[editable path="VSync"]
+[editable path="FPSLimit"]
+[editable path="MSAA"]
+[editable path="Brightness"]

@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://cmf4fawglmioa"]
+
+[ext_resource type="Script" uid="uid://2webt2du6j3n" path="res://screen/title/TitleScreen.cs" id="1_cn8bv"]
+[ext_resource type="PackedScene" uid="uid://cin8wwvquooaf" path="res://ui/title/parent_ui_title.tscn" id="2_2je2x"]
+[ext_resource type="PackedScene" uid="uid://d3p15ss0xghnu" path="res://ui/save_files/top_ui_save_files.tscn" id="3_fhia6"]
+[ext_resource type="PackedScene" uid="uid://cq8ls38iyaoac" path="res://ui/settings/parent_ui_settings.tscn" id="4_qt4yu"]
+
+[node name="TitleScreen" type="Control" unique_id=293663943 node_paths=PackedStringArray("InitialTopLevelUI", "TitleUI", "SaveFilesUI", "SettingsUI")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_behavior_recursive = 2
+mouse_filter = 2
+script = ExtResource("1_cn8bv")
+InitialTopLevelUI = NodePath("TopUI_Title")
+TitleUI = NodePath("TopUI_Title")
+SaveFilesUI = NodePath("TopUi_SaveFiles")
+SettingsUI = NodePath("TopUI_Settings")
+PlayTest1Path = "res://screen/gameplay/play_test_1.tscn"
+
+[node name="TopUI_Title" parent="." unique_id=917215898 instance=ExtResource("2_2je2x")]
+layout_mode = 1
+
+[node name="TopUi_SaveFiles" parent="." unique_id=579501167 instance=ExtResource("3_fhia6")]
+visible = false
+layout_mode = 1
+
+[node name="TopUI_Settings" parent="." unique_id=2138487004 instance=ExtResource("4_qt4yu")]
+visible = false
+layout_mode = 1

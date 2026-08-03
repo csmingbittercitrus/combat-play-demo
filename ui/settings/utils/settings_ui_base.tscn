@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://c1jjbsf564cgt"]
+
+[ext_resource type="LabelSettings" uid="uid://cmysld0ae4jw5" path="res://ui/utils/ui_common.tres" id="1_8fdnn"]
+
+[node name="SettingsUiBase" type="HBoxContainer" unique_id=1024141612]
+custom_minimum_size = Vector2(0, 64)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="." unique_id=170105681]
+layout_mode = 2
+text = "Settings 1"
+label_settings = ExtResource("1_8fdnn")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=104025522]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="." unique_id=1957289341]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2

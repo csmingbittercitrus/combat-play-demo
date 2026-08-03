@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://chgh7o5yu7du3"]
+
+[ext_resource type="Script" uid="uid://607r2egi0esd" path="res://ui/utils/ParentUI.cs" id="1_7hsl4"]
+[ext_resource type="PackedScene" uid="uid://c1jjbsf564cgt" path="res://ui/settings/utils/settings_ui_base.tscn" id="2_f1o5t"]
+
+[node name="Settings_Sounds" type="VBoxContainer" unique_id=945784655]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7hsl4")
+
+[node name="Master" parent="." unique_id=1024141612 instance=ExtResource("2_f1o5t")]
+layout_mode = 2
+
+[node name="Label" parent="Master" index="0" unique_id=170105681]
+text = "settings_sounds_master"
+
+[node name="Music" parent="." unique_id=408364934 instance=ExtResource("2_f1o5t")]
+layout_mode = 2
+
+[node name="Label" parent="Music" index="0" unique_id=170105681]
+text = "settings_sounds_music"
+
+[node name="SFX" parent="." unique_id=1887067966 instance=ExtResource("2_f1o5t")]
+layout_mode = 2
+
+[node name="Label" parent="SFX" index="0" unique_id=170105681]
+text = "settings_sounds_sfx"
+
+[node name="Environments" parent="." unique_id=1765770758 instance=ExtResource("2_f1o5t")]
+layout_mode = 2
+
+[node name="Label" parent="Environments" index="0" unique_id=170105681]
+text = "settings_sounds_environments"
+
+[node name="Voice" parent="." unique_id=157088520 instance=ExtResource("2_f1o5t")]
+layout_mode = 2
+
+[node name="Label" parent="Voice" index="0" unique_id=170105681]
+text = "settings_sounds_voice"
+
+[node name="MuteInBackground" parent="." unique_id=1735273802 instance=ExtResource("2_f1o5t")]
+layout_mode = 2
+
+[node name="Label" parent="MuteInBackground" index="0" unique_id=170105681]
+text = "settings_sounds_mute_in_background"
+
+[editable path="Master"]
+[editable path="Music"]
+[editable path="SFX"]
+[editable path="Environments"]
+[editable path="Voice"]
+[editable path="MuteInBackground"]
