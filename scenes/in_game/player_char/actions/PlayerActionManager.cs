@@ -107,7 +107,7 @@ public partial class PlayerActionManager : Node2D
         else
         {
             CurrentAction = Melee;
-            Melee.Scale = new Vector2(-FSM.FacingDirection, 1.0f);
+            Melee.Scale = new Vector2(FSM.FacingDirection, 1.0f);
             CurrentAction.ActivateHurtBox();
             StartAfterCastDelay(0.4f);
         }
@@ -124,14 +124,14 @@ public partial class PlayerActionManager : Node2D
             if (Player.IsOnFloor())
             {
                 CurrentAction = Parry;
-                Parry.Scale = new Vector2(-FSM.FacingDirection, 1.0f);
+                Parry.Scale = new Vector2(FSM.FacingDirection, 1.0f);
                 CurrentAction.ActivateHurtBox();
                 StartAfterCastDelay(0.4f);
             }
             else
             {
                 CurrentAction = ParryInAir;
-                ParryInAir.Scale = new Vector2(-FSM.FacingDirection, 1.0f);
+                ParryInAir.Scale = new Vector2(FSM.FacingDirection, 1.0f);
                 CurrentAction.ActivateHurtBox();
                 StartAfterCastDelay(0.4f);
             }

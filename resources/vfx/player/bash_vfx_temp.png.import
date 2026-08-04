@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3ganw7sslnj6"
-path="res://.godot/imported/parry_vfx.png-db889cd932f89a9469e81077f5bb6e96.ctex"
+uid="uid://b6aawcptf282t"
+path="res://.godot/imported/bash_vfx_temp.png-62dc35d63dafb36fe7a844c0928b42cc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/vfx/player/parry_vfx.png"
-dest_files=["res://.godot/imported/parry_vfx.png-db889cd932f89a9469e81077f5bb6e96.ctex"]
+source_file="res://resources/vfx/player/bash_vfx_temp.png"
+dest_files=["res://.godot/imported/bash_vfx_temp.png-62dc35d63dafb36fe7a844c0928b42cc.ctex"]
 
 [params]
 

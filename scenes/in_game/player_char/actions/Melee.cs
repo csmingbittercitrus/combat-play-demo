@@ -6,6 +6,27 @@ using System;
 
 public partial class Melee : HurtBox_Player
 {
+    bool flag = false;
+
+    public override void ActivateHurtBox()
+    {
+        excludedTargets = new();
+        if (flag)
+        {
+            animation.Play("start_attack_1");
+            flag = false;
+        }
+        else
+        {
+            animation.Play("start_attack_2");
+            flag = true;
+        }
+        
+        IsCooled = false;
+    }
+
+
+
     public override void OnHit()
     {
         
