@@ -50,11 +50,5 @@ public partial class Idle : PlayerState
         {
             EmitSignalStateSwitchRequested(PlayerStateNames.Dash);
         }
-
-        else
-        {
-            base.HandleInputEvent(@event);
-        }
-        
     }
 }

@@ -11,32 +11,35 @@ using System;
 public partial class PlayerActionManager : Node2D
 {
     [Export] PlayerChar Player { get; set; }
-
     [Export] Player_FSM FSM { get; set; }
+
     public bool IsHoldingItem { get; private set; } = false;
     public HandheldItem HoldingItem { get; private set; }
+
+
 
     // 공용 후딜레이 관리
     public bool CanExecuteAction { get; private set; } = true;
     [Export] Timer AfterCastDelayTimer { get; set; }
 
 
-    [Export] HurtBox_Player Melee { get; set; }
-    [Export] HurtBox_Player Parry { get; set; }
-    [Export] HurtBox_Player ParryInAir { get; set; }
+    [Export] HurtBox_Player Slash { get; set; }
+    [Export] HurtBox_Player Bash { get; set; }
+    [Export] HurtBox_Player Spin { get; set; }
 
     [Export] Area2D PickUpArea { get; set; }
-
     [Export] Node2D CurrentHandPosition { get; set; }
     [Export] Node2D Hand { get; set; }
 
     private HurtBox_Player CurrentAction;
 
+
+
     public override void _Ready()
     {
-        Melee.AttackFinished += FinishAttack;
-        Parry.AttackFinished += FinishAttack;
-        ParryInAir.AttackFinished += FinishAttack;
+        Slash.AttackFinished += FinishAttack;
+        Bash.AttackFinished += FinishAttack;
+        Spin.AttackFinished += FinishAttack;
 
         CurrentAction = null;
     }
@@ -46,36 +49,7 @@ public partial class PlayerActionManager : Node2D
         CurrentAction = null;
     }
 
-
-    public void ExecuteAction(StringName actionName)
-    {
-        if (!CanExecuteAction)
-        {
-            return;
-        }
-        
-        if (CurrentAction != null)
-        {
-            return;
-        }
-
-        if (actionName == PlayerActionNames.Melee)
-        {
-            ExecuteAction_Right_Hand();
-        }
-        else if (actionName == PlayerActionNames.Parry)
-        {
-            ExecuteAction_Left_Hand();
-        }
-        else if (actionName == PlayerActionNames.Smash)
-        {
-            
-        }
-        else if (actionName == PlayerActionNames.Throw)
-        {
-            ExecuteAction_Throw();
-        }
-    }
+    
 
     public void TryPickUpItems()
     {
@@ -100,21 +74,28 @@ public partial class PlayerActionManager : Node2D
 
     public void ExecuteAction_Right_Hand()
     {
+        if (!CanExecuteAction) return;
+
         if (IsHoldingItem)
         {
-            HoldingItem.ActivateAction_Right_Hand(FSM.FacingDirection, FSM.InputAxis_Y);
+            
         }
         else
         {
-            CurrentAction = Melee;
-            Melee.Scale = new Vector2(FSM.FacingDirection, 1.0f);
-            CurrentAction.ActivateHurtBox();
-            StartAfterCastDelay(0.4f);
+            if (Slash.CheckIfCanExecuteAction())
+            {
+                CurrentAction = Slash;
+                Slash.Scale = new Vector2(FSM.FacingDirection, 1.0f);
+                CurrentAction.ActivateHurtBox();
+                StartAfterCastDelay(0.4f);
+            }
         }
     }
 
     public void ExecuteAction_Left_Hand()
     {
+        if (!CanExecuteAction) return;
+
         if (IsHoldingItem)
         {
             
@@ -123,27 +104,36 @@ public partial class PlayerActionManager : Node2D
         {
             if (Player.IsOnFloor())
             {
-                CurrentAction = Parry;
-                Parry.Scale = new Vector2(FSM.FacingDirection, 1.0f);
-                CurrentAction.ActivateHurtBox();
-                StartAfterCastDelay(0.4f);
+                if (Bash.CheckIfCanExecuteAction())
+                {
+                    CurrentAction = Bash;
+                    Bash.Scale = new Vector2(FSM.FacingDirection, 1.0f);
+                    CurrentAction.ActivateHurtBox();
+                    StartAfterCastDelay(0.7f);
+                    FSM.SwitchState(PlayerStateNames.Bash);
+                }
             }
             else
             {
-                CurrentAction = ParryInAir;
-                ParryInAir.Scale = new Vector2(FSM.FacingDirection, 1.0f);
-                CurrentAction.ActivateHurtBox();
-                StartAfterCastDelay(0.4f);
+                if (Spin.CheckIfCanExecuteAction())
+                {
+                    CurrentAction = Spin;
+                    Spin.Scale = new Vector2(FSM.FacingDirection, 1.0f);
+                    CurrentAction.ActivateHurtBox();
+                    StartAfterCastDelay(0.4f);
+                    FSM.SwitchState(PlayerStateNames.Spin);
+                }
+
             }
         }
     }
 
     public void ExecuteAction_Throw()
     {
-        GD.Print("!");
+        if (!CanExecuteAction) return;
+
         if (IsHoldingItem)
         {
-            GD.Print("!");
             HoldingItem.ActivateAction_Throw(FSM.FacingDirection, FSM.InputAxis_Y);
             ReleaseItem();
         }

@@ -23,6 +23,7 @@ public partial class Melee : HurtBox_Player
         }
         
         IsCooled = false;
+        CooldownTimer.Start();
     }
 
 
@@ -32,7 +33,7 @@ public partial class Melee : HurtBox_Player
         
     }
     
-    public override void OnClash()
+    public override void OnParry()
     {
         
     }

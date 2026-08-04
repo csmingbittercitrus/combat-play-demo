@@ -471,7 +471,7 @@ bittercitrus_jump={
 "deadzone": 0.2,
 "events": []
 }
-bittercitrus_attack={
+bittercitrus_slash={
 "deadzone": 0.2,
 "events": []
 }
@@ -483,7 +483,7 @@ bittercitrus_dash={
 "deadzone": 0.2,
 "events": []
 }
-bittercitrus_parry={
+bittercitrus_bash={
 "deadzone": 0.2,
 "events": []
 }

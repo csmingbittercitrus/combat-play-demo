@@ -44,10 +44,6 @@ public partial class Brake : PlayerState
         {
             EmitSignalStateSwitchRequested(PlayerStateNames.Jump);
         }
-        else
-        {
-            base.HandleInputEvent(@event);
-        }
     }
 
     private void _on_brake_duration_timeout()

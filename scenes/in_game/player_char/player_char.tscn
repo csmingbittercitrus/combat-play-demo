@@ -11,11 +11,13 @@
 [ext_resource type="Script" uid="uid://b4brnsvfcwgbp" path="res://scenes/in_game/player_char/fsm/states/Sprint.cs" id="9_qlney"]
 [ext_resource type="Script" uid="uid://bqgwbm55mhhkc" path="res://scenes/in_game/player_char/fsm/states/Brake.cs" id="10_qlney"]
 [ext_resource type="Script" uid="uid://rg2d8fl3ypis" path="res://scenes/in_game/player_char/fsm/states/SprintJump.cs" id="11_ynsr2"]
-[ext_resource type="Script" uid="uid://cbmfumq0ym8sb" path="res://scenes/in_game/player_char/actions/PlayerActionManager.cs" id="12_qetm4"]
-[ext_resource type="Script" uid="uid://d1corcdd5sdn6" path="res://scenes/in_game/player_char/Crouch.cs" id="12_stv0n"]
-[ext_resource type="Script" uid="uid://dxayevw0yb0aa" path="res://scenes/in_game/player_char/actions/Melee.cs" id="13_2cg08"]
-[ext_resource type="Script" uid="uid://bj05xm1sgp024" path="res://scenes/in_game/player_char/actions/Parry.cs" id="14_r600y"]
-[ext_resource type="Script" uid="uid://chpc5y5bixgcs" path="res://scenes/in_game/player_char/actions/Spin.cs" id="15_lvmcp"]
+[ext_resource type="Script" uid="uid://cbmfumq0ym8sb" path="res://scenes/in_game/player_char/action_manager/PlayerActionManager.cs" id="12_qetm4"]
+[ext_resource type="Script" uid="uid://d1corcdd5sdn6" path="res://scenes/in_game/player_char/fsm/states/Crouch.cs" id="12_stv0n"]
+[ext_resource type="Script" uid="uid://dxayevw0yb0aa" path="res://scenes/in_game/player_char/action_manager/actions/Melee.cs" id="13_2cg08"]
+[ext_resource type="Script" uid="uid://c8xhe33kqsadt" path="res://scenes/in_game/player_char/fsm/states/Spin.cs" id="13_l6axq"]
+[ext_resource type="Script" uid="uid://bj05xm1sgp024" path="res://scenes/in_game/player_char/action_manager/actions/Bash.cs" id="14_r600y"]
+[ext_resource type="Script" uid="uid://d0t7vwewe8hd3" path="res://scenes/in_game/player_char/fsm/states/Bash.cs" id="14_srw78"]
+[ext_resource type="Script" uid="uid://chpc5y5bixgcs" path="res://scenes/in_game/player_char/action_manager/actions/Spin.cs" id="15_lvmcp"]
 [ext_resource type="Texture2D" uid="uid://5ap2mcuts40r" path="res://resources/vfx/player/slash_vfx_temp.png" id="15_stv0n"]
 [ext_resource type="Texture2D" uid="uid://b6aawcptf282t" path="res://resources/vfx/player/bash_vfx_temp.png" id="17_stv0n"]
 [ext_resource type="Texture2D" uid="uid://xxsxyi5wcb1e" path="res://resources/vfx/player/spin_vfx_temp.png" id="19_kbw3p"]
@@ -328,10 +330,12 @@ DebugLabel_InputAxis = NodePath("../Debug_InputAxis")
 [node name="JumpBufferTimer" type="Timer" parent="FSM" unique_id=647243198]
 process_callback = 0
 wait_time = 0.1
+one_shot = true
 
 [node name="KoyoteTimer" type="Timer" parent="FSM" unique_id=454938557]
 process_callback = 0
 wait_time = 0.1
+one_shot = true
 
 [node name="Idle" type="Node" parent="FSM" unique_id=71213726]
 script = ExtResource("4_sja5d")
@@ -355,6 +359,7 @@ one_shot = true
 script = ExtResource("8_yk42j")
 DashDuration = NodePath("DashDuration")
 DashCooldown = NodePath("DashCooldown")
+CanExecuteAction = false
 
 [node name="DashDuration" type="Timer" parent="FSM/Dash" unique_id=202045892]
 process_callback = 0
@@ -393,15 +398,35 @@ UpperCollision = NodePath("../../UpperCollision")
 UpperHandPosition = NodePath("../../ActionManager/PlayerHand/UpperHandPosition")
 LowerHandPosition = NodePath("../../ActionManager/PlayerHand/LowerHandPosition")
 Hand = NodePath("../../ActionManager/PlayerHand/CurrentHandPosition")
+CanExecuteAction = false
 
-[node name="ActionManager" type="Node2D" parent="." unique_id=274473084 node_paths=PackedStringArray("Player", "FSM", "AfterCastDelayTimer", "Melee", "Parry", "ParryInAir", "PickUpArea", "CurrentHandPosition", "Hand")]
+[node name="Spin" type="Node" parent="FSM" unique_id=1942671112 node_paths=PackedStringArray("SpinDuration")]
+script = ExtResource("13_l6axq")
+SpinDuration = NodePath("SpinDuration")
+CanExecuteAction = false
+
+[node name="SpinDuration" type="Timer" parent="FSM/Spin" unique_id=663606094]
+process_callback = 0
+wait_time = 0.15
+one_shot = true
+
+[node name="Bash" type="Node" parent="FSM" unique_id=1540794319 node_paths=PackedStringArray("BashDuration")]
+script = ExtResource("14_srw78")
+BashDuration = NodePath("BashDuration")
+
+[node name="BashDuration" type="Timer" parent="FSM/Bash" unique_id=594219435]
+process_callback = 0
+wait_time = 0.5
+one_shot = true
+
+[node name="ActionManager" type="Node2D" parent="." unique_id=274473084 node_paths=PackedStringArray("Player", "FSM", "AfterCastDelayTimer", "Slash", "Bash", "Spin", "PickUpArea", "CurrentHandPosition", "Hand")]
 script = ExtResource("12_qetm4")
 Player = NodePath("..")
 FSM = NodePath("../FSM")
 AfterCastDelayTimer = NodePath("AfterCastDelay")
-Melee = NodePath("Slash")
-Parry = NodePath("Parry")
-ParryInAir = NodePath("Spin")
+Slash = NodePath("Slash")
+Bash = NodePath("Parry")
+Spin = NodePath("Spin")
 PickUpArea = NodePath("PlayerHand/PickUp")
 CurrentHandPosition = NodePath("PlayerHand/CurrentHandPosition")
 Hand = NodePath("PlayerHand")
@@ -456,7 +481,7 @@ libraries/ = SubResource("AnimationLibrary_stv0n")
 
 [node name="CooldownTimer" type="Timer" parent="ActionManager/Parry" unique_id=321885227]
 process_callback = 0
-wait_time = 0.3
+wait_time = 0.7
 one_shot = true
 
 [node name="Sprite2D" type="Sprite2D" parent="ActionManager/Parry" unique_id=90034783]
@@ -483,7 +508,7 @@ libraries/ = SubResource("AnimationLibrary_l6axq")
 
 [node name="CooldownTimer" type="Timer" parent="ActionManager/Spin" unique_id=1920389279]
 process_callback = 0
-wait_time = 0.3
+wait_time = 0.5
 one_shot = true
 
 [node name="Sprite2D" type="Sprite2D" parent="ActionManager/Spin" unique_id=1559886134]
@@ -554,6 +579,6 @@ metadata/_edit_use_anchors_ = true
 [connection signal="timeout" from="FSM/Dash/DashCooldown" to="FSM/Dash" method="_on_dash_cooldown_timeout"]
 [connection signal="timeout" from="FSM/Brake/BrakeDuration" to="FSM/Brake" method="_on_brake_duration_timeout"]
 [connection signal="timeout" from="FSM/SprintJump/JumpDuration" to="FSM/SprintJump" method="_on_jump_duration_timeout"]
+[connection signal="timeout" from="FSM/Spin/SpinDuration" to="FSM/Spin" method="_on_spin_duration_timeout"]
+[connection signal="timeout" from="FSM/Bash/BashDuration" to="FSM/Bash" method="_on_bash_duration_timeout"]
 [connection signal="timeout" from="ActionManager/AfterCastDelay" to="ActionManager" method="_on_after_cast_delay_timeout"]
-[connection signal="timeout" from="ActionManager/Slash/CooldownTimer" to="ActionManager/Slash" method="_on_cooldown_timer_timeout"]
-[connection signal="timeout" from="ActionManager/Parry/CooldownTimer" to="ActionManager/Parry" method="_on_cooldown_timer_timeout"]

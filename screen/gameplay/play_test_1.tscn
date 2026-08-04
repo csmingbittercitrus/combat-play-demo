@@ -7,7 +7,7 @@
 [node name="play_test_1" type="Node2D" unique_id=974066741]
 
 [node name="PlayerChar" parent="." unique_id=1358731176 instance=ExtResource("1_p6nwc")]
-position = Vector2(2450.3997, -456.37183)
+position = Vector2(278.08887, 6.312378)
 
 [node name="Camera2D" type="Camera2D" parent="PlayerChar" unique_id=2076048368]
 

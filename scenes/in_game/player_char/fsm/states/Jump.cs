@@ -1,6 +1,7 @@
 namespace Game.Player.FSM;
 
 using BitterCitrus.SRC.Core.BInput;
+using Game.Player.Actions;
 using Godot;
 using System;
 
@@ -50,10 +51,6 @@ public partial class Jump : PlayerState
         if (@event.IsActionReleased(InputActionNames.Jump))
         {
             EmitSignalStateSwitchRequested(PlayerStateNames.Fall);
-        }
-        else
-        {
-            base.HandleInputEvent(@event);
         }
     }
 

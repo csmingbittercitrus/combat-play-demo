@@ -70,7 +70,7 @@ public static class InputBinder_Keyboard
         BindInputEventToAction(InputActionNames.UI_Right, SettingsManager.Instance.KeyboardInputMap[InputActionNames.Camera_Right]);
 
         BindInputEventToAction(InputActionNames.UI_Accept, SettingsManager.Instance.KeyboardInputMap[InputActionNames.Jump]);
-        BindInputEventToAction(InputActionNames.UI_Accept, SettingsManager.Instance.KeyboardInputMap[InputActionNames.Attack]);
+        BindInputEventToAction(InputActionNames.UI_Accept, SettingsManager.Instance.KeyboardInputMap[InputActionNames.Slash]);
     }
 
 

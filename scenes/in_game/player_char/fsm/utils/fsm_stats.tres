@@ -11,3 +11,4 @@ MaxFallSpeed = 3000.0
 DashSpeed = 2000.0
 SprintSpeed = 1100.0
 DecelSpeed = 700.0
+MaxFallSpeedDuringSpin = 300.0

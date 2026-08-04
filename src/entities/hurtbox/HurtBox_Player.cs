@@ -25,8 +25,8 @@ public abstract partial class HurtBox_Player : Area2D
 
 
     #region Vars
-    protected bool IsCooled { get; set; }
-    [Export] protected Timer CooldownTimer { get; private set; }
+    protected bool IsCooled { get; set; } = true;
+    [Export] public Timer CooldownTimer { get; private set; }
 
     protected HashSet<Node2D> excludedTargets;
     [Export] protected PlayerAttackType type { get; set; }
@@ -65,6 +65,7 @@ public abstract partial class HurtBox_Player : Area2D
         excludedTargets = new();
         animation.Play("start_attack");
         IsCooled = false;
+        CooldownTimer.Start();
     }
 
     public virtual void DeactivateHurtBox()
@@ -102,7 +103,7 @@ public abstract partial class HurtBox_Player : Area2D
 
     #region Abstract
     public abstract void OnHit();
-    public abstract void OnClash();
+    public abstract void OnParry();
     #endregion
 }
 

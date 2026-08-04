@@ -44,10 +44,10 @@ public static class InputBinder_Utils
         InputActionNames.FastMap,
 
         InputActionNames.Jump,
-        InputActionNames.Attack,
+        InputActionNames.Slash,
         InputActionNames.Smash,
         InputActionNames.Dash,
-        InputActionNames.Parry,
+        InputActionNames.Bash,
         InputActionNames.Throw,
         InputActionNames.Potion,
     };
@@ -59,10 +59,10 @@ public static class InputBinder_Utils
         InputActionNames.FastMap,
 
         InputActionNames.Jump,
-        InputActionNames.Attack,
+        InputActionNames.Slash,
         InputActionNames.Smash,
         InputActionNames.Dash,
-        InputActionNames.Parry,
+        InputActionNames.Bash,
         InputActionNames.Throw,
         InputActionNames.Potion,
     };
@@ -73,10 +73,10 @@ public static class InputBinder_Utils
         // 설정 값을 초기화할 때 호출됨.
         { InputActionNames.Jump, new InputData(JoyButton.A) },
         { InputActionNames.Smash, new InputData(JoyButton.B)},
-        { InputActionNames.Attack, new InputData(JoyButton.X)},
+        { InputActionNames.Slash, new InputData(JoyButton.X)},
         { InputActionNames.FastMap, new InputData(JoyButton.Y)},
 
-        { InputActionNames.Parry, new InputData(JoyButton.LeftShoulder)},
+        { InputActionNames.Bash, new InputData(JoyButton.LeftShoulder)},
         { InputActionNames.Potion, new InputData(JoyButton.RightShoulder)},
 
         { InputActionNames.Throw, new InputData(JoyAxis.TriggerLeft)},
@@ -110,10 +110,10 @@ public static class InputBinder_Utils
         InputActionNames.FastMap,
 
         InputActionNames.Jump,
-        InputActionNames.Attack,
+        InputActionNames.Slash,
         InputActionNames.Smash,
         InputActionNames.Dash,
-        InputActionNames.Parry,
+        InputActionNames.Bash,
         InputActionNames.Throw,
         InputActionNames.Potion,
     };
@@ -138,9 +138,9 @@ public static class InputBinder_Utils
 
         { InputActionNames.Jump, Key.Space},
         { InputActionNames.Dash, Key.K},
-        { InputActionNames.Attack, Key.J},
+        { InputActionNames.Slash, Key.J},
         { InputActionNames.Smash, Key.U},
-        { InputActionNames.Parry, Key.L},
+        { InputActionNames.Bash, Key.L},
         { InputActionNames.Throw, Key.O},
         { InputActionNames.Potion, Key.I},
 

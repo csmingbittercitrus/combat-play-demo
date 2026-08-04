@@ -11,5 +11,7 @@ public partial class FSMStats : Resource
     [Export] public float MaxFallSpeed { get; private set; }
     [Export] public float DashSpeed { get; private set; }
     [Export] public float SprintSpeed { get; private set; }
+
     [Export] public float DecelSpeed { get; private set; }
+    [Export] public float MaxFallSpeedDuringSpin { get; private set; }
 }

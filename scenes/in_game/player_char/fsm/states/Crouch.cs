@@ -64,7 +64,7 @@ public partial class Crouch : PlayerState
             EmitSignalStateSwitchRequested(PlayerStateNames.Jump);
         }
 
-        else if (@event.IsActionPressed(InputActionNames.Attack))
+        else if (@event.IsActionPressed(InputActionNames.Slash))
         {
             FSM.ActionManager.TryPickUpItems();
         }

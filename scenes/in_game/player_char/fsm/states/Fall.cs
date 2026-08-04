@@ -1,6 +1,7 @@
 namespace Game.Player.FSM;
 
 using BitterCitrus.SRC.Core.BInput;
+using Game.Player.Actions;
 using Godot;
 using System;
 using System.Collections.Generic;
@@ -55,10 +56,6 @@ public partial class Fall : PlayerState
             {
                 FSM.CreateJumpBuffer();
             }
-        }
-        else
-        {
-            base.HandleInputEvent(@event);
         }
     }
 }

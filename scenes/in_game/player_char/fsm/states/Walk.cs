@@ -45,9 +45,5 @@ public partial class Walk : PlayerState
         {
             EmitSignalStateSwitchRequested(PlayerStateNames.Dash);
         }
-        else
-        {
-            base.HandleInputEvent(@event);
-        }
     }
 }

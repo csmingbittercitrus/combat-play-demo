@@ -52,7 +52,6 @@ public partial class Player_FSM : Node
             {
                 StateDict[child.Name] = state;
                 state.StateSwitchRequested += SwitchState;
-                state.ActionRequested += RequestAction;
             }
         }
 
@@ -128,12 +127,60 @@ public partial class Player_FSM : Node
 
     public override void _UnhandledInput(InputEvent @event)
     {
+        if (@event.IsActionPressed(InputActionNames.Slash))
+        {
+            TryToExecuteAction_Right_Hand();
+            return;
+        }
+        else if(@event.IsActionPressed(InputActionNames.Bash))
+        {
+            TryToExecuteAction_Left_Hand();
+            return;
+        }
+        else if(@event.IsActionPressed(InputActionNames.Smash))
+        {
+            TryToExecuteAction_Smash();
+            return;
+        }
+        else if(@event.IsActionPressed(InputActionNames.Throw))
+        {
+            TryToExecuteAction_Throw();
+            return;
+        }
+
         CurrentState.HandleInputEvent(@event);
     }
 
-    public void RequestAction(StringName actionName)
+    private void TryToExecuteAction_Right_Hand()
     {
-        ActionManager.ExecuteAction(actionName);
+        if (CurrentState.Name == PlayerStateNames.Crouch)
+        {
+            ActionManager.TryPickUpItems();
+        }
+        if (!CurrentState.CanExecuteAction) return;
+        
+        ActionManager.ExecuteAction_Right_Hand();
+    }
+
+    private void TryToExecuteAction_Left_Hand()
+    {
+        if (!CurrentState.CanExecuteAction) return;
+
+        ActionManager.ExecuteAction_Left_Hand();
+    }
+
+    private void TryToExecuteAction_Smash()
+    {
+        if (!CurrentState.CanExecuteAction) return;
+
+        ActionManager.ExecuteAction_Smash();
+    }
+
+    private void TryToExecuteAction_Throw()
+    {
+        if (!CurrentState.CanExecuteAction) return;
+
+        ActionManager.ExecuteAction_Throw();
     }
     #endregion
 

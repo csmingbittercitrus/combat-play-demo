@@ -47,10 +47,10 @@ public static class InputActionNames
 
 
     public static readonly StringName Jump = "bittercitrus_jump";
-    public static readonly StringName Attack = "bittercitrus_attack";
+    public static readonly StringName Slash = "bittercitrus_slash";
     public static readonly StringName Smash = "bittercitrus_smash";
     public static readonly StringName Dash = "bittercitrus_dash";
-    public static readonly StringName Parry = "bittercitrus_parry";
+    public static readonly StringName Bash = "bittercitrus_bash";
     public static readonly StringName Throw = "bittercitrus_throw";
     public static readonly StringName Potion = "bittercitrus_potion";
 }

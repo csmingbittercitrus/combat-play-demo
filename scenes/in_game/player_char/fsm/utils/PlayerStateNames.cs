@@ -18,13 +18,12 @@ public static class PlayerStateNames
     public static readonly StringName Jump = "Jump";
     public static readonly StringName Fall = "Fall";
     public static readonly StringName SprintJump = "SprintJump";
-    public static readonly StringName DashInAir = "DashInAir";
 
     public static readonly StringName LedgeClimb = "LedgeClimb";
 
     public static readonly StringName WallSlipper = "WallSlipper";
     public static readonly StringName WallJump = "WallJump";
 
-    public static readonly StringName Parry = "Parry";
+    public static readonly StringName Bash = "Bash";
     public static readonly StringName Spin = "Spin";
 }
