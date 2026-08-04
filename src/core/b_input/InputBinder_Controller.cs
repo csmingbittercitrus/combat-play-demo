@@ -100,7 +100,7 @@ public static class InputBinder_Controller
 
         foreach (System.Collections.Generic.KeyValuePair<StringName, InputData> pair in SettingsManager.Instance.ControllerInputMap)
         {
-            UnbindKeyboardMouseInputFromAction(pair.Key);
+            UnbindControllerInputFromAction(pair.Key);
 
             switch (pair.Value.Type)
             {

@@ -137,12 +137,12 @@ public static class InputBinder_Utils
         { InputActionNames.Camera_Right, Key.Right},
 
         { InputActionNames.Jump, Key.Space},
-        { InputActionNames.Dash, Key.Shift},
+        { InputActionNames.Dash, Key.K},
         { InputActionNames.Attack, Key.J},
         { InputActionNames.Smash, Key.U},
-        { InputActionNames.Parry, Key.K},
-        { InputActionNames.Throw, Key.L},
-        { InputActionNames.Potion, Key.E},
+        { InputActionNames.Parry, Key.L},
+        { InputActionNames.Throw, Key.O},
+        { InputActionNames.Potion, Key.I},
 
         { InputActionNames.Menu, Key.Quoteleft},
         { InputActionNames.Menu_Equipment, Key.Key1},

@@ -16,6 +16,7 @@ public static class InputBinder_Keyboard
 
         BindUncustomables();
         ApplyCustomInputMap();
+        ApplyUIInputMapByCustomInputMap();
     }
 
     private static void ClearInputMap()
@@ -53,8 +54,6 @@ public static class InputBinder_Keyboard
 
             BindInputEventToAction(pair.Key, pair.Value);
         }
-
-        ApplyUIInputMapByCustomInputMap();
     }
 
     private static void ApplyUIInputMapByCustomInputMap()

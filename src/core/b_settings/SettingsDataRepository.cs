@@ -4,6 +4,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 // 설정값들을 json 파일의 형태로 읽고 쓰는 레퍼지토리 클래스
 
@@ -12,6 +13,7 @@ using System.Text.Json;
 // 사용자 지정 ControllerInputMap을 controller_input_map.json 파일에 읽고 씀
 
 // 에디터에서 편하게 파일 확인 : 프로젝트 - 사용자 데이터 폴더 열기
+
 
 public static class SettingsDataRepository
 {
@@ -25,7 +27,7 @@ public static class SettingsDataRepository
         // 보기 편한 형태로 직렬화
         WriteIndented = true,
         //StringName <-> string 자동으로 변환해주는 컨버터
-        Converters = { new JsonStringNameConverter() }
+        Converters = { new JsonStringNameConverter(), new JsonStringEnumConverter() }
     };
     #endregion
 
