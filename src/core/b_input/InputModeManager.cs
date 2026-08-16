@@ -6,9 +6,9 @@ using System;
 // 입력을 중앙 제어하는 싱글톤
 // 컨트롤러 입력과 키보드 입력 중 하나만을 받도록 함
 
-public partial class InputManager : Node
+public partial class InputModeManager : Node
 {
-    public static InputManager Instance;
+    public static InputModeManager Instance;
 
 
     // 현 InputMode에 따라 UI를 변경하기 위해, 각 UI가 구독하는 시그널

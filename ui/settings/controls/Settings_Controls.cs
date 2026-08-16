@@ -13,17 +13,17 @@ public partial class Settings_Controls : ParentUI
     {
         ApplyInputMode();
 
-        InputManager.Instance.InputModeChanged += ApplyInputMode;
+        InputModeManager.Instance.InputModeChanged += ApplyInputMode;
     }
 
     public override void _ExitTree()
     {
-        InputManager.Instance.InputModeChanged -= ApplyInputMode;
+        InputModeManager.Instance.InputModeChanged -= ApplyInputMode;
     }
 
     private void ApplyInputMode()
     {
-        switch (InputManager.Instance.CurrentInputMode)
+        switch (InputModeManager.Instance.CurrentInputMode)
         {
             case InputDeviceType.Controller:
                 Keyboard.DeactivateNow();
