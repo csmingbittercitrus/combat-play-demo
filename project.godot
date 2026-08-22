@@ -22,7 +22,7 @@ buses/default_bus_layout="uid://doxasw3y24a55"
 [autoload]
 
 SettingsManager="*uid://b0u88wmcrfxk8"
-InputManager="*uid://dmt4ramonrvr5"
+InputModeManager="*uid://bdcrtbfk5pany"
 CombatManager="*uid://c4plinoly6wl4"
 
 [display]
