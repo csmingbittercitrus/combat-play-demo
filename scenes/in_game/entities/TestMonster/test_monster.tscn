@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://gcxlis25vrkp"]
+
+[ext_resource type="Script" uid="uid://dqq66yva6lqx1" path="res://src/entities/classes/TestMonster.cs" id="1_xh7xo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_782pv"]
+size = Vector2(20, 76)
+
+[node name="testMonster" type="CharacterBody2D" unique_id=970918888]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_xh7xo")
+BaseMaxHP = 100
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1294011967]
+shape = SubResource("RectangleShape2D_782pv")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=174607628]
+offset_left = -10.0
+offset_top = -38.0
+offset_right = 30.0
+offset_bottom = 2.0
+scale = Vector2(0.4965723, 1.894734)
+color = Color(1, 0.27058825, 1, 1)

@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://n07rxt8elh73" path="res://scenes/in_game/player_char/player_char.tscn" id="1_p6nwc"]
 [ext_resource type="PackedScene" uid="uid://bm2dar8fgn22f" path="res://scenes/in_game/playtest/levels/play_test_1/test1.tscn" id="2_m7kbs"]
 [ext_resource type="PackedScene" uid="uid://bqi7brr7qt4au" path="res://scenes/in_game/entities/handhelds/handheld_test_1.tscn" id="3_hodxa"]
+[ext_resource type="PackedScene" uid="uid://gcxlis25vrkp" path="res://scenes/in_game/entities/TestMonster/test_monster.tscn" id="4_m7kbs"]
 
 [node name="play_test_1" type="Node2D" unique_id=974066741]
 
@@ -16,3 +17,6 @@ position = Vector2(-289, -873)
 
 [node name="HandheldTest1" parent="." unique_id=861019370 instance=ExtResource("3_hodxa")]
 position = Vector2(2572, -287)
+
+[node name="testMonster" parent="." unique_id=970918888 instance=ExtResource("4_m7kbs")]
+position = Vector2(2368, -320)
