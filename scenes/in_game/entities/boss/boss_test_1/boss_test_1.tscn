@@ -4,9 +4,9 @@
 [ext_resource type="Script" uid="uid://bog5pi8eki5g1" path="res://src/behavior_tree/BehaviorTree.cs" id="2_s17tk"]
 [ext_resource type="Script" uid="uid://cakvwj7lnqrnk" path="res://src/behavior_tree/branch/SequenceBranch.cs" id="3_4yn1e"]
 [ext_resource type="Script" uid="uid://bsyml120kk1si" path="res://src/behavior_tree/Blackboard.cs" id="3_s17tk"]
-[ext_resource type="Script" uid="uid://dolwhlgj0onvu" path="res://src/behavior_tree/leaf/AwaitLeaf.cs" id="4_qgptx"]
-[ext_resource type="Script" uid="uid://2c4qne2s8r7" path="res://src/behavior_tree/leaf/AwaitAnimationLeaf.cs" id="5_whjfx"]
-[ext_resource type="Script" uid="uid://wqt2g1bbn48p" path="res://src/behavior_tree/leaf/AwaitMoveLeaf.cs" id="6_qnv1u"]
+[ext_resource type="Script" uid="uid://dolwhlgj0onvu" path="res://src/behavior_tree/leaf/Action/AwaitLeaf.cs" id="4_qgptx"]
+[ext_resource type="Script" uid="uid://2c4qne2s8r7" path="res://src/behavior_tree/leaf/Action/AwaitAnimationLeaf.cs" id="5_whjfx"]
+[ext_resource type="Script" uid="uid://wqt2g1bbn48p" path="res://src/behavior_tree/leaf/Action/AwaitMoveLeaf.cs" id="6_qnv1u"]
 [ext_resource type="Texture2D" uid="uid://xxsxyi5wcb1e" path="res://resources/vfx/player/spin_vfx_temp.png" id="7_5ko4r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5h11f"]
@@ -72,8 +72,8 @@ metadata/_custom_type_script = "uid://dolwhlgj0onvu"
 
 [node name="AwaitAnimationLeaf" type="Node" parent="BehaviorTree/SequenceBranch" unique_id=538729917 node_paths=PackedStringArray("Animation")]
 script = ExtResource("5_whjfx")
-Animation = NodePath("../../../Sprite2D/AnimationPlayer")
 AnimationName = &"test"
+Animation = NodePath("../../../Sprite2D/AnimationPlayer")
 metadata/_custom_type_script = "uid://2c4qne2s8r7"
 
 [node name="AwaitLeaf2" type="Node" parent="BehaviorTree/SequenceBranch" unique_id=919321954]
