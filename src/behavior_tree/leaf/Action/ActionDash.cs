@@ -1,24 +1,22 @@
-namespace BitterCitrus.SRC.BT;
-
+using BitterCitrus.SRC.BT;
 using BitterCitrus.SRC.Entites;
-
 using Godot;
 using System;
-using System.Threading;
 
 [Tool]
 [GlobalClass]
-public partial class Dash : BaseLeaf
+public partial class ActionDash : BaseLeaf
 {
     [Export] public float DashDistance { get; private set; } = 300f;
     [Export] public float DashSpeed { get; private set; } = 1200f;
 
     private bool Started = false;
-    private Vector2 _startPos;
+    private float dashDir = 1.0f;
+    private Vector2 StartPos;
     public override void Quit()
     {
-        Started= false;
-        duration= 0;
+        Started = false;
+        duration = 0;
 
     }
 
@@ -28,20 +26,20 @@ public partial class Dash : BaseLeaf
         {
             Started = true;
             duration = 0f;
-            _startPos = enemy.GlobalPosition;
+            StartPos = enemy.GlobalPosition;
 
-            enemy.Velocity = new Vector2(enemy.Direction * DashSpeed, 0f);
+            dashDir = enemy.Direction;
             return TickResultEnum.RUNNING;
         }
 
         duration += delta;
 
-        
-        float moved = Mathf.Abs(enemy.GlobalPosition.X - _startPos.X);
 
-        
+        float moved = Mathf.Abs(enemy.GlobalPosition.X - StartPos.X);
+
+
         bool reached = moved >= DashDistance;
-        
+
         if (reached)
         {
             enemy.Velocity = new Vector2(0f, enemy.Velocity.Y);
@@ -49,7 +47,7 @@ public partial class Dash : BaseLeaf
             return TickResultEnum.SUCCESS;
         }
 
-        enemy.Velocity = new Vector2(enemy.Direction * DashSpeed, enemy.Velocity.Y);
+        enemy.Velocity = new Vector2(-(dashDir * DashSpeed), enemy.Velocity.Y);
         return TickResultEnum.RUNNING;
     }
 }

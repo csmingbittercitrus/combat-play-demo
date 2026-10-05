@@ -24,7 +24,10 @@
 [ext_resource type="Script" uid="uid://bog5pi8eki5g1" path="res://src/behavior_tree/BehaviorTree.cs" id="22_do6ge"]
 [ext_resource type="Script" uid="uid://cakvwj7lnqrnk" path="res://src/behavior_tree/branch/SequenceBranch.cs" id="23_ph0ah"]
 [ext_resource type="Script" uid="uid://dolwhlgj0onvu" path="res://src/behavior_tree/leaf/Action/AwaitLeaf.cs" id="24_6q1uk"]
+[ext_resource type="Script" uid="uid://d0jkjohh8akrt" path="res://src/behavior_tree/branch/SelectorBranch.cs" id="24_vdwn6"]
+[ext_resource type="Script" uid="uid://b4gyd7yxa3y4g" path="res://src/behavior_tree/leaf/Condition/ConditionFar.cs" id="25_0wbu7"]
 [ext_resource type="Script" uid="uid://d3nwp7bes4kpu" path="res://src/behavior_tree/leaf/Action/BackJump.cs" id="25_vdwn6"]
+[ext_resource type="Script" uid="uid://l8800t52ihn6" path="res://src/behavior_tree/leaf/Action/ActionDash.cs" id="26_8qb17"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_782pv"]
 animations = [{
@@ -201,16 +204,37 @@ script = ExtResource("22_do6ge")
 Body = NodePath("..")
 metadata/_custom_type_script = "uid://bog5pi8eki5g1"
 
-[node name="Sequence_Backjump" type="Node" parent="BehaviorTree" unique_id=866512460]
+[node name="SequenceMain" type="Node" parent="BehaviorTree" unique_id=669811732]
 script = ExtResource("23_ph0ah")
 metadata/_custom_type_script = "uid://cakvwj7lnqrnk"
 
-[node name="AwaitLeaf" type="Node" parent="BehaviorTree/Sequence_Backjump" unique_id=863281848]
+[node name="AwaitLeaf" type="Node" parent="BehaviorTree/SequenceMain" unique_id=863281848]
 script = ExtResource("24_6q1uk")
 Duration = 2.0
 metadata/_custom_type_script = "uid://dolwhlgj0onvu"
 
-[node name="BackJump" type="Node" parent="BehaviorTree/Sequence_Backjump" unique_id=878704457]
+[node name="Selector_Dash_Backjump" type="Node" parent="BehaviorTree/SequenceMain" unique_id=474574173]
+script = ExtResource("24_vdwn6")
+metadata/_custom_type_script = "uid://d0jkjohh8akrt"
+
+[node name="Sequence_Dash" type="Node" parent="BehaviorTree/SequenceMain/Selector_Dash_Backjump" unique_id=1106654842]
+script = ExtResource("23_ph0ah")
+metadata/_custom_type_script = "uid://cakvwj7lnqrnk"
+
+[node name="ConditionFar" type="Node" parent="BehaviorTree/SequenceMain/Selector_Dash_Backjump/Sequence_Dash" unique_id=1706903637]
+script = ExtResource("25_0wbu7")
+Distance = 300.0
+metadata/_custom_type_script = "uid://b4gyd7yxa3y4g"
+
+[node name="ActionDash" type="Node" parent="BehaviorTree/SequenceMain/Selector_Dash_Backjump/Sequence_Dash" unique_id=1740992796]
+script = ExtResource("26_8qb17")
+metadata/_custom_type_script = "uid://l8800t52ihn6"
+
+[node name="Sequence_Backjump" type="Node" parent="BehaviorTree/SequenceMain/Selector_Dash_Backjump" unique_id=866512460]
+script = ExtResource("23_ph0ah")
+metadata/_custom_type_script = "uid://cakvwj7lnqrnk"
+
+[node name="BackJump" type="Node" parent="BehaviorTree/SequenceMain/Selector_Dash_Backjump/Sequence_Backjump" unique_id=878704457]
 script = ExtResource("25_vdwn6")
 JumpSpeedX = 1000.0
 JumpSpeedY = -2000.0
