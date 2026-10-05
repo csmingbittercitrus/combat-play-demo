@@ -8,7 +8,7 @@ using System;
 [GlobalClass]
 public partial class SelectorBranch : BaseBranch
 {
-    public override TickResultEnum Tick(Enemy enemy, Blackboard blackboard, float delta)
+    public override TickResultEnum Tick(Enemy enemy, CombatManager blackboard, float delta)
     {
         for (int i = RunningChildIndex; i < children.Count; i++)
         {

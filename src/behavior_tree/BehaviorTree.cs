@@ -54,7 +54,7 @@ public partial class BehaviorTree : Node
     [Export] public CharacterBody2D Body { get; private set; }
 
     private Enemy _body { get; set; }
-    [Export] public Blackboard blackboard { get; private set; }
+    [Export] public CombatManager blackboard { get; private set; }
 
     private BaseBTNode NodeToTick { get; set; }
 
@@ -90,6 +90,7 @@ public partial class BehaviorTree : Node
         {
             GD.PrintErr($"[{Name}] : ㅇㄴㄹㅇ");
         }
+        blackboard = CombatManager.Instance;
     }
 
     public override void _Process(double delta)
@@ -109,7 +110,7 @@ public partial class BehaviorTree : Node
 
         TickResultEnum result = TickResultEnum.FAILURE;
 
-        blackboard.Tick(_body, blackboard, delta);
+        //blackboard.Tick(_body, blackboard, delta);
 
         Node child = GetChild<Node>(0);
 

@@ -26,7 +26,7 @@ public partial class AwaitMoveLeaf : BaseBTNode
     }
 
 
-    public override TickResultEnum Tick(Enemy enemy, Blackboard blackboard, float delta)
+    public override TickResultEnum Tick(Enemy enemy, CombatManager blackboard, float delta)
     {
         Vector2 velocity;
 

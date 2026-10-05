@@ -22,7 +22,7 @@ public partial class AwaitAnimationLeaf : BaseLeaf
         Animation.AnimationFinished += _on_animation_finished;
     }
 
-    public override TickResultEnum Tick(Enemy enemy, Blackboard blackboard, float delta)
+    public override TickResultEnum Tick(Enemy enemy, CombatManager blackboard, float delta)
     {
         if (IsAnimationFinished)
         {

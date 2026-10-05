@@ -35,7 +35,7 @@ public abstract partial class BaseBranch : BaseBTNode
         }
     }
 
-    public override abstract TickResultEnum Tick(Enemy enemy, Blackboard blackboard, float delta);
+    public override abstract TickResultEnum Tick(Enemy enemy, CombatManager blackboard, float delta);
 
     public override void Quit()
     {

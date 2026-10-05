@@ -10,9 +10,11 @@ public abstract partial class Enemy : CharacterBody2D, IAttackable
     [Export] public AnimationPlayer Animation { get; private set; }
 
     [Export] public int BaseMaxHP { get; private set; }
+    [Export] public float AttackRange { get; private set; }
     public int MaxHP { get; private set; }
     public int CurrentHP { get; private set; }
 
+    public float Direction { get; set; }
 
 
     public void HandlePlayerAttack(PlayerAttackType type)

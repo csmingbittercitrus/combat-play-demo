@@ -10,6 +10,7 @@ using System.Linq;
 [GlobalClass]
 public abstract partial class BaseLeaf : BaseBTNode
 {
+    protected float duration;
     public override string[] _GetConfigurationWarnings()
     {
         string[] warnings = new string[0];
@@ -17,7 +18,7 @@ public abstract partial class BaseLeaf : BaseBTNode
     }
 
 
-    public override abstract TickResultEnum Tick(Enemy enemy, Blackboard blackboard, float delta);
+    public override abstract TickResultEnum Tick(Enemy enemy, CombatManager blackboard, float delta);
 
     public override abstract void Quit();
 }

@@ -500,6 +500,14 @@ bittercitrus_potion={
 
 locale/translations=PackedStringArray("res://resources/translations/translation_title_screen.en.translation", "res://resources/translations/translation_title_screen.kr.translation")
 
+[layer_names]
+
+2d_physics/layer_1="PlayerChar"
+2d_physics/layer_2="PlayerAttack"
+2d_physics/layer_3="Enemy"
+2d_physics/layer_4="AttackPlayerEnemyHit"
+2d_physics/layer_9="Terrain"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

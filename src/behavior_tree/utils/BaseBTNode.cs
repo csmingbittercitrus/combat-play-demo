@@ -8,7 +8,7 @@ using System;
 [GlobalClass]
 public abstract partial class BaseBTNode : Node
 {
-    public abstract TickResultEnum Tick(Enemy enemy, Blackboard blackboard, float delta);
+    public abstract TickResultEnum Tick(Enemy enemy, CombatManager blackboard, float delta);
 
     public abstract void Quit();
 }

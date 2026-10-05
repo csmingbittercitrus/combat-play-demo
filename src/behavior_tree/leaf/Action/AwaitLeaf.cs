@@ -14,7 +14,7 @@ public partial class AwaitLeaf : BaseLeaf
     private float elapsed { get; set; } = 0.0f;
     private bool isRunning { get; set; } = false;
 
-    public override TickResultEnum Tick(Enemy enemy, Blackboard blackboard, float delta)
+    public override TickResultEnum Tick(Enemy enemy, CombatManager blackboard, float delta)
     {
         if (isRunning)
         {
@@ -33,6 +33,7 @@ public partial class AwaitLeaf : BaseLeaf
         }
         else if (elapsed == 0.0f)
         {
+            enemy.Animation.Play("idle");
             GD.Print($"[{Name}] Await 시작");
             isRunning = true;
             elapsed += delta;
