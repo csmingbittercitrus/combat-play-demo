@@ -28,6 +28,8 @@ public partial class FSMStats : Resource
     public float MaxFallSpeedDuringSpin { get; private set; }
     [Export]
     public float MaxFallSpeedDuringGlide { get; private set; }
+    [Export]
+    public float GlideAccel_X { get; private set; }
 
 
 
@@ -51,9 +53,21 @@ public partial class FSMStats : Resource
 
 
 
-    [ExportCategory("Actions")]
+    [ExportCategory("Combat Actions")]
     [Export]
     public float AttackVelocity_X { get; private set; }
     [Export]
     public float AttackAccel_X { get; private set; }
+
+
+
+    [ExportCategory("Move Actions")]
+    [Export]
+    public float DashInAirInitialVelocity_X { get; private set; }
+    [Export]
+    public float DashInAirInitialVelocity_Y { get; private set; }
+    [Export]
+    public float DashInAirAccel_X { get; private set; }
+    [Export]
+    public float DashInAirAccel_Y { get; private set; }
 }

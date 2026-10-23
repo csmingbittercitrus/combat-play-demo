@@ -37,6 +37,8 @@ public partial class Player_FSM : Node
     [Export] public Label DebugLabel_PlayerState { get; private set; }
     [Export] public Label DebugLabel_InputAxis { get; private set; }
 
+    public bool CanDashInAir { get; set; } = true;
+
     public override void _Ready()
     {
         Init();
@@ -122,6 +124,11 @@ public partial class Player_FSM : Node
         {
             GD.PrintErr($"[Player_FSM] 유효하지 않은 stateName : {targetStateName}");
             return;
+        }
+
+        if (Player.IsOnFloor())
+        {
+            CanDashInAir = true;
         }
     }
 
