@@ -29,4 +29,6 @@ public static class PlayerStateNames
 
     public static readonly StringName Glide = "Glide";
     public static readonly StringName Attack = "Attack";
+
+    public static readonly StringName DashInAir = "DashInAir";
 }

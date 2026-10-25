@@ -14,7 +14,6 @@
 [ext_resource type="Script" uid="uid://cbmfumq0ym8sb" path="res://scenes/in_game/player_char/action_manager/PlayerActionManager.cs" id="12_qetm4"]
 [ext_resource type="Script" uid="uid://d1corcdd5sdn6" path="res://scenes/in_game/player_char/fsm/states/Crouch.cs" id="12_stv0n"]
 [ext_resource type="Script" uid="uid://dxayevw0yb0aa" path="res://scenes/in_game/player_char/action_manager/actions/Melee.cs" id="13_2cg08"]
-[ext_resource type="Script" uid="uid://c8xhe33kqsadt" path="res://scenes/in_game/player_char/fsm/states/Spin.cs" id="13_l6axq"]
 [ext_resource type="Script" uid="uid://bj05xm1sgp024" path="res://scenes/in_game/player_char/action_manager/actions/Bash.cs" id="14_r600y"]
 [ext_resource type="Script" uid="uid://d0t7vwewe8hd3" path="res://scenes/in_game/player_char/fsm/states/Bash.cs" id="14_srw78"]
 [ext_resource type="Script" uid="uid://8xbh4ophlvrv" path="res://scenes/in_game/player_char/fsm/states/LedgeGrab.cs" id="15_5iav4"]
@@ -25,24 +24,53 @@
 [ext_resource type="Script" uid="uid://e6ea2a4hyk8x" path="res://scenes/in_game/player_char/fsm/states/WallJump.cs" id="17_yk00u"]
 [ext_resource type="Script" uid="uid://71mp8t4ni3vp" path="res://scenes/in_game/player_char/fsm/states/Glide.cs" id="18_2nld2"]
 [ext_resource type="Script" uid="uid://42r1ex836ycn" path="res://scenes/in_game/player_char/fsm/states/Attack.cs" id="19_2s2qw"]
-[ext_resource type="Texture2D" uid="uid://xxsxyi5wcb1e" path="res://resources/vfx/player/spin_vfx_temp.png" id="19_kbw3p"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qetm4"]
-size = Vector2(235.375, 162)
+[ext_resource type="Texture2D" uid="uid://ceovstyrysxwo" path="res://resources/vfx/player/spin_vfx_temp.png" id="19_kbw3p"]
+[ext_resource type="Script" uid="uid://caef5pld6usfx" path="res://scenes/in_game/player_char/DashInAir.cs" id="19_se5w5"]
 
 [sub_resource type="Animation" id="Animation_r600y"]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CollisionShape2D:disabled")
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
+"values": [7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionPolygon2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
 "values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_lvmcp"]
+resource_name = "melee"
+length = 0.15
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.15),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"DeactivateHurtBox"
+}]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -51,53 +79,22 @@ tracks/1/path = NodePath("Sprite2D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [7]
-}
-
-[sub_resource type="Animation" id="Animation_lvmcp"]
-resource_name = "melee"
-length = 0.15
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CollisionShape2D:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.15),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"DeactivateHurtBox"
-}]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionPolygon2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_srw78"]
@@ -116,31 +113,31 @@ tracks/0/keys = {
 "update": 1,
 "values": [4, 5, 6, 7]
 }
-tracks/1/type = "value"
+tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.15),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0.15),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"DeactivateHurtBox"
 }]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionPolygon2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ahnmt"]
@@ -229,22 +226,53 @@ _data = {
 &"start_attack": SubResource("Animation_ahnmt")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_frrda"]
-size = Vector2(264, 112)
+[sub_resource type="CircleShape2D" id="CircleShape2D_2qss0"]
+radius = 181.02486
 
 [sub_resource type="Animation" id="Animation_l6axq"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CollisionShape2D:disabled")
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
+"values": [3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
 "values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_kbw3p"]
+resource_name = "spin"
+length = 0.15
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.15),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"DeactivateHurtBox"
+}]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -253,53 +281,22 @@ tracks/1/path = NodePath("Sprite2D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [3]
-}
-
-[sub_resource type="Animation" id="Animation_kbw3p"]
-resource_name = "spin"
-length = 0.15
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CollisionShape2D:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.15),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"DeactivateHurtBox"
-}]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l6axq"]
@@ -400,16 +397,6 @@ LowerHandPosition = NodePath("../../ActionManager/NodeToFlipX/LowerHandPosition"
 HoldingItemPosition = NodePath("../../ActionManager/NodeToFlipX/HoldingItemPosition")
 CanExecuteAction = false
 
-[node name="Spin" type="Node" parent="FSM" unique_id=1942671112 node_paths=PackedStringArray("SpinDuration")]
-script = ExtResource("13_l6axq")
-SpinDuration = NodePath("SpinDuration")
-CanExecuteAction = false
-
-[node name="SpinDuration" type="Timer" parent="FSM/Spin" unique_id=663606094]
-process_callback = 0
-wait_time = 0.15
-one_shot = true
-
 [node name="Bash" type="Node" parent="FSM" unique_id=1540794319 node_paths=PackedStringArray("BashDuration")]
 script = ExtResource("14_srw78")
 BashDuration = NodePath("BashDuration")
@@ -457,6 +444,15 @@ AttackDuration = 0.3
 MoveDuration = 0.2
 CanExecuteAction = false
 
+[node name="DashInAir" type="Node" parent="FSM" unique_id=34110650 node_paths=PackedStringArray("DashInAirDuration")]
+script = ExtResource("19_se5w5")
+DashInAirDuration = NodePath("DashInAirDuration")
+
+[node name="DashInAirDuration" type="Timer" parent="FSM/DashInAir" unique_id=2035527052]
+process_callback = 0
+wait_time = 0.3
+one_shot = true
+
 [node name="ActionManager" type="Node2D" parent="." unique_id=274473084 node_paths=PackedStringArray("Player", "FSM", "AfterCastDelayTimer", "Slash", "Bash", "Spin", "PickUpArea", "HoldingItemPosition", "NodeToFlip")]
 script = ExtResource("12_qetm4")
 Player = NodePath("..")
@@ -481,9 +477,9 @@ script = ExtResource("13_2cg08")
 CooldownTimer = NodePath("CooldownTimer")
 animation = NodePath("AnimationPlayer")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionManager/Slash" unique_id=572219459]
-position = Vector2(101.3125, 2)
-shape = SubResource("RectangleShape2D_qetm4")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ActionManager/Slash" unique_id=1321213667]
+position = Vector2(-4, -22)
+polygon = PackedVector2Array(49, -61, 128, -55, 175, -31, 198, 11, 179, 59, 139, 78, 77, 99, 131, 59, 166, 10, 128, -37)
 disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ActionManager/Slash" unique_id=1247982190]
@@ -495,7 +491,7 @@ wait_time = 0.3
 one_shot = true
 
 [node name="Sprite2D" type="Sprite2D" parent="ActionManager/Slash" unique_id=704331482]
-position = Vector2(123, -7)
+position = Vector2(123, -14)
 scale = Vector2(0.40234375, 0.40234375)
 texture = ExtResource("15_stv0n")
 hframes = 8
@@ -533,12 +529,10 @@ collision_layer = 2
 collision_mask = 4
 script = ExtResource("15_lvmcp")
 CooldownTimer = NodePath("CooldownTimer")
-type = 2
 animation = NodePath("AnimationPlayer")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionManager/Spin" unique_id=616327748]
-position = Vector2(7, 3)
-shape = SubResource("RectangleShape2D_frrda")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionManager/Spin" unique_id=87116100]
+shape = SubResource("CircleShape2D_2qss0")
 disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ActionManager/Spin" unique_id=1387753425]
@@ -551,7 +545,7 @@ one_shot = true
 
 [node name="Sprite2D" type="Sprite2D" parent="ActionManager/Spin" unique_id=1559886134]
 position = Vector2(1.999999, -23.000015)
-scale = Vector2(0.6103515, 0.6103515)
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("19_kbw3p")
 hframes = 4
 frame = 3
@@ -621,9 +615,9 @@ metadata/_edit_use_anchors_ = true
 [connection signal="timeout" from="FSM/Dash/DashDuration" to="FSM/Dash" method="_on_dash_duration_timeout"]
 [connection signal="timeout" from="FSM/Dash/DashCooldown" to="FSM/Dash" method="_on_dash_cooldown_timeout"]
 [connection signal="timeout" from="FSM/Brake/BrakeDuration" to="FSM/Brake" method="_on_brake_duration_timeout"]
-[connection signal="timeout" from="FSM/Spin/SpinDuration" to="FSM/Spin" method="_on_spin_duration_timeout"]
 [connection signal="timeout" from="FSM/Bash/BashDuration" to="FSM/Bash" method="_on_bash_duration_timeout"]
 [connection signal="timeout" from="FSM/LedgeGrab/LedgeGrabDuration" to="FSM/LedgeGrab" method="_on_ledge_grab_duration_timeout"]
 [connection signal="timeout" from="FSM/WallJump/ForceWallJumpDuration" to="FSM/WallJump" method="_on_force_wall_jump_duration_timeout"]
 [connection signal="timeout" from="FSM/WallJump/WallJumpDuration" to="FSM/WallJump" method="_on_wall_jump_duration_timeout"]
+[connection signal="timeout" from="FSM/DashInAir/DashInAirDuration" to="FSM/DashInAir" method="_on_dash_in_air_duration_timeout"]
 [connection signal="timeout" from="ActionManager/AfterCastDelay" to="ActionManager" method="_on_after_cast_delay_timeout"]

@@ -50,7 +50,6 @@ public partial class Fall : PlayerState
     
     public override void CheckIfSwitchState(double delta)
     {
-        GD.Print($"{FSM.Player.GetWallNormal()}, {FSM.InputAxis_X}");
         if (FSM.Player.IsOnFloor())
         {
             this.SwitchStateToIdleOrWalk();
@@ -79,6 +78,13 @@ public partial class Fall : PlayerState
             else
             {
                 EmitSignalStateSwitchRequested(PlayerStateNames.Glide);
+            }
+        }
+        else if (@event.IsActionPressed(InputActionNames.Dash))
+        {
+            if (FSM.CanDashInAir)
+            {
+                EmitSignalStateSwitchRequested(PlayerStateNames.DashInAir);
             }
         }
     }

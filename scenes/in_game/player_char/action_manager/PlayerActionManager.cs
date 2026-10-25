@@ -82,16 +82,26 @@ public partial class PlayerActionManager : Node2D
         }
         else
         {
-            if (Slash.CheckIfCanExecuteAction())
-            {
-                CurrentAction = Slash;
-                Slash.Scale = new Vector2(FSM.FacingDirection, 1.0f);
-                CurrentAction.ActivateHurtBox();
-                StartAfterCastDelay(0.4f);
-            }
             if (Player.IsOnFloor())
             {
-                FSM.SwitchState(PlayerStateNames.Attack);
+                if (Slash.CheckIfCanExecuteAction())
+                {
+                    CurrentAction = Slash;
+                    Slash.Scale = new Vector2(FSM.FacingDirection, 1.0f);
+                    CurrentAction.ActivateHurtBox();
+                    StartAfterCastDelay(0.4f);
+                    FSM.SwitchState(PlayerStateNames.Attack);
+                }
+            }
+            else
+            {
+                if (Spin.CheckIfCanExecuteAction())
+                {
+                    CurrentAction = Spin;
+                    Spin.Scale = new Vector2(FSM.FacingDirection, 1.0f);
+                    CurrentAction.ActivateHurtBox();
+                    StartAfterCastDelay(0.4f);
+                }
             }
         }
     }
@@ -116,18 +126,6 @@ public partial class PlayerActionManager : Node2D
                     StartAfterCastDelay(0.7f);
                     FSM.SwitchState(PlayerStateNames.Bash);
                 }
-            }
-            else
-            {
-                if (Spin.CheckIfCanExecuteAction())
-                {
-                    CurrentAction = Spin;
-                    Spin.Scale = new Vector2(FSM.FacingDirection, 1.0f);
-                    CurrentAction.ActivateHurtBox();
-                    StartAfterCastDelay(0.4f);
-                    FSM.SwitchState(PlayerStateNames.Spin);
-                }
-
             }
         }
     }

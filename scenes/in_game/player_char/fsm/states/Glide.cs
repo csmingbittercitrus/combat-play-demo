@@ -20,7 +20,12 @@ public partial class Glide : PlayerState
 
     public override void ApplyVelocity(double delta)
     {
-        FSM.PlayerVelocity.X = FSM.InputAxis_X * FSM.Stats.WalkSpeed;
+        float targetVelocity = FSM.InputAxis_X * FSM.Stats.WalkSpeed;
+
+
+        FSM.PlayerVelocity.X = Mathf.MoveToward(FSM.PlayerVelocity.X, targetVelocity, (float)delta * FSM.Stats.GlideAccel_X);
+
+
         FSM.PlayerVelocity.Y = Mathf.MoveToward(FSM.PlayerVelocity.Y, FSM.Stats.MaxFallSpeedDuringGlide, (float)delta * FSM.Player.GetGravity().Y);
         
         if (FSM.PlayerVelocity.Y > FSM.Stats.MaxFallSpeedDuringGlide)
