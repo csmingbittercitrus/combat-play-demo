@@ -25,7 +25,8 @@
 [ext_resource type="Script" uid="uid://71mp8t4ni3vp" path="res://scenes/in_game/player_char/fsm/states/Glide.cs" id="18_2nld2"]
 [ext_resource type="Script" uid="uid://42r1ex836ycn" path="res://scenes/in_game/player_char/fsm/states/Attack.cs" id="19_2s2qw"]
 [ext_resource type="Texture2D" uid="uid://ceovstyrysxwo" path="res://resources/vfx/player/spin_vfx_temp.png" id="19_kbw3p"]
-[ext_resource type="Script" uid="uid://caef5pld6usfx" path="res://scenes/in_game/player_char/DashInAir.cs" id="19_se5w5"]
+[ext_resource type="Script" uid="uid://caef5pld6usfx" path="res://scenes/in_game/player_char/fsm/states/DashInAir.cs" id="19_se5w5"]
+[ext_resource type="Script" uid="uid://j16wwkhoa7tn" path="res://scenes/in_game/player_char/fsm/states/Spin.cs" id="20_se5w5"]
 
 [sub_resource type="Animation" id="Animation_r600y"]
 length = 0.001
@@ -453,6 +454,16 @@ process_callback = 0
 wait_time = 0.3
 one_shot = true
 
+[node name="Spin" type="Node" parent="FSM" unique_id=766332449 node_paths=PackedStringArray("SpinDuration", "LedgeRay")]
+script = ExtResource("20_se5w5")
+SpinDuration = NodePath("SpinDuration")
+LedgeRay = NodePath("../../ActionManager/NodeToFlipX/RayCast2D")
+
+[node name="SpinDuration" type="Timer" parent="FSM/Spin" unique_id=1163818090]
+process_callback = 0
+wait_time = 0.3
+one_shot = true
+
 [node name="ActionManager" type="Node2D" parent="." unique_id=274473084 node_paths=PackedStringArray("Player", "FSM", "AfterCastDelayTimer", "Slash", "Bash", "Spin", "PickUpArea", "HoldingItemPosition", "NodeToFlip")]
 script = ExtResource("12_qetm4")
 Player = NodePath("..")
@@ -620,4 +631,5 @@ metadata/_edit_use_anchors_ = true
 [connection signal="timeout" from="FSM/WallJump/ForceWallJumpDuration" to="FSM/WallJump" method="_on_force_wall_jump_duration_timeout"]
 [connection signal="timeout" from="FSM/WallJump/WallJumpDuration" to="FSM/WallJump" method="_on_wall_jump_duration_timeout"]
 [connection signal="timeout" from="FSM/DashInAir/DashInAirDuration" to="FSM/DashInAir" method="_on_dash_in_air_duration_timeout"]
+[connection signal="timeout" from="FSM/Spin/SpinDuration" to="FSM/Spin" method="_on_spin_duration_timeout"]
 [connection signal="timeout" from="ActionManager/AfterCastDelay" to="ActionManager" method="_on_after_cast_delay_timeout"]

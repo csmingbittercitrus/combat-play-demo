@@ -127,6 +127,11 @@ public partial class PlayerActionManager : Node2D
                     FSM.SwitchState(PlayerStateNames.Bash);
                 }
             }
+            else
+            {
+                StartAfterCastDelay(0.5f);
+                FSM.SwitchState(PlayerStateNames.Spin);
+            }
         }
     }
 
