@@ -6,6 +6,10 @@ using System;
 public partial class TestMonster : Enemy
 {
     [Export] public AnimatedSprite2D Sprite {  get; private set; }
+    [Export] public PackedScene KnifeScene {  get; private set; }
+    [Export] public Node2D Launcher {  get; private set; }
+
+
     public override void HandleMelee()
     {
         GD.Print($"HandleMelee");
@@ -52,6 +56,18 @@ public partial class TestMonster : Enemy
 
 
         MoveAndSlide();
+    }
+    public void LaunchKnfie()
+    {
+        Knife p = KnifeScene.Instantiate<Knife>();
+        GetTree().CurrentScene.AddChild(p);
+        p.GlobalPosition = Launcher.GlobalPosition;
+        Vector2 dir = Launcher.GlobalPosition.DirectionTo(CombatManager.Instance.Player.GlobalPosition);
+
+        p.Rotation = dir.Angle();
+        p.Launch(dir, 1200); //temp magic num
+
+
     }
     public override void HandleNonPlayerAttack() { }
 }

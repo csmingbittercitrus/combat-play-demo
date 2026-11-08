@@ -6,7 +6,7 @@ public partial class Knife : Projectile
 {
     public override void Destroy()
     {
-        
+        QueueFree();
     }
 
 
@@ -19,21 +19,21 @@ public partial class Knife : Projectile
 
     public override void HandleMagic()
     {
-        
+        Destroy();
     }
 
     public override void HandleMelee()
     {
-        
+        Destroy();
     }
 
     public override void HandleParry()
     {
-        
+        Destroy();
     }
 
     public override void HandleSmash()
     {
-        
+        Destroy();
     }
 }

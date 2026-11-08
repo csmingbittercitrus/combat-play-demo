@@ -7,6 +7,7 @@
 size = Vector2(130, 17)
 
 [node name="knife" type="CharacterBody2D" unique_id=89004841]
+collision_layer = 263
 script = ExtResource("1_y3ob6")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=856228436]
