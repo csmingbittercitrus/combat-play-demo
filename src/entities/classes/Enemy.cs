@@ -11,6 +11,7 @@ public abstract partial class Enemy : CharacterBody2D, IAttackable
 
     [Export] public int BaseMaxHP { get; private set; }
     [Export] public float AttackRange { get; private set; }
+    [Export] public Node2D NodeToFlipX { get; private set; }
     public int MaxHP { get; private set; }
     public int CurrentHP { get; private set; }
 

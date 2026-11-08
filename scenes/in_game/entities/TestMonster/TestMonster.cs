@@ -28,8 +28,12 @@ public partial class TestMonster : Enemy
     }
     public override void _PhysicsProcess(double delta)
     {
-        Sprite.FlipH = Direction > 0f;
         
+        Vector2 nodeDir = NodeToFlipX.Scale;
+        nodeDir.X = -Direction;
+        NodeToFlipX.Scale= nodeDir;
+
+
 
         Vector2 playerPos = CombatManager.Instance.Player.GlobalPosition;
 
