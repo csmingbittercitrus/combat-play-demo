@@ -26,7 +26,12 @@
 [ext_resource type="Script" uid="uid://42r1ex836ycn" path="res://scenes/in_game/player_char/fsm/states/Attack.cs" id="19_2s2qw"]
 [ext_resource type="Texture2D" uid="uid://ceovstyrysxwo" path="res://resources/vfx/player/spin_vfx_temp.png" id="19_kbw3p"]
 [ext_resource type="Script" uid="uid://caef5pld6usfx" path="res://scenes/in_game/player_char/fsm/states/DashInAir.cs" id="19_se5w5"]
+<<<<<<< Updated upstream
 [ext_resource type="Script" uid="uid://j16wwkhoa7tn" path="res://scenes/in_game/player_char/fsm/states/Spin.cs" id="20_se5w5"]
+=======
+[ext_resource type="Script" uid="uid://dqf8oi8xxbl0e" path="res://scenes/in_game/player_char/fsm/states/Pogo.cs" id="20_se5w5"]
+[ext_resource type="Script" uid="uid://c553yxces5ug6" path="res://scenes/in_game/player_char/fsm/states/Damaged.cs" id="21_t4r5b"]
+>>>>>>> Stashed changes
 
 [sub_resource type="Animation" id="Animation_r600y"]
 length = 0.001
@@ -315,30 +320,28 @@ size = Vector2(64, 47)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_stv0n"]
 size = Vector2(64, 81)
 
-[node name="PlayerChar" type="CharacterBody2D" unique_id=1358731176]
+[node name="PlayerChar" type="CharacterBody2D" unique_id=1358731176 node_paths=PackedStringArray("fsm", "InvincibilityTimer")]
 z_index = 2
 collision_mask = 256
 script = ExtResource("1_britx")
+fsm = NodePath("FSM")
+InitialMaxHP = 4
+InvincibilityTimer = NodePath("InvincibilityTimer")
 
-[node name="FSM" type="Node" parent="." unique_id=1089784056 node_paths=PackedStringArray("Player", "ActionManager", "JumpBufferTimer", "KoyoteTimer", "DebugLabel_PlayerState", "DebugLabel_InputAxis")]
+[node name="InvincibilityTimer" type="Timer" parent="." unique_id=472707703]
+process_callback = 0
+wait_time = 0.2
+one_shot = true
+
+[node name="FSM" type="Node" parent="." unique_id=1089784056 node_paths=PackedStringArray("Player", "ActionManager", "DebugLabel_PlayerState", "DebugLabel_InputAxis")]
 script = ExtResource("2_t7lxb")
 Player = NodePath("..")
 ActionManager = NodePath("../ActionManager")
 Stats = ExtResource("3_lvexf")
-JumpBufferTimer = NodePath("JumpBufferTimer")
-KoyoteTimer = NodePath("KoyoteTimer")
+JumpBufferDuration = 0.1
+KoyoteDuration = 0.1
 DebugLabel_PlayerState = NodePath("../Debug_PlayerState")
 DebugLabel_InputAxis = NodePath("../Debug_InputAxis")
-
-[node name="JumpBufferTimer" type="Timer" parent="FSM" unique_id=647243198]
-process_callback = 0
-wait_time = 0.1
-one_shot = true
-
-[node name="KoyoteTimer" type="Timer" parent="FSM" unique_id=454938557]
-process_callback = 0
-wait_time = 0.1
-one_shot = true
 
 [node name="Idle" type="Node" parent="FSM" unique_id=71213726]
 script = ExtResource("4_sja5d")
@@ -350,45 +353,26 @@ script = ExtResource("4_m6kff")
 script = ExtResource("6_iaa7s")
 LedgeRay = NodePath("../../ActionManager/NodeToFlipX/RayCast2D")
 
-[node name="Jump" type="Node" parent="FSM" unique_id=1541206462 node_paths=PackedStringArray("JumpDuration")]
+[node name="Jump" type="Node" parent="FSM" unique_id=1541206462 node_paths=PackedStringArray("LedgeRay")]
 script = ExtResource("7_sja5d")
-JumpDuration = NodePath("JumpDuration")
+Duration = 0.4
+LedgeRay = NodePath("../../ActionManager/NodeToFlipX/RayCast2D")
 
-[node name="JumpDuration" type="Timer" parent="FSM/Jump" unique_id=1348357510]
-process_callback = 0
-wait_time = 0.4
-one_shot = true
-
-[node name="Dash" type="Node" parent="FSM" unique_id=1362575525 node_paths=PackedStringArray("DashDuration", "DashCooldown")]
+[node name="Dash" type="Node" parent="FSM" unique_id=1362575525]
 script = ExtResource("8_yk42j")
-DashDuration = NodePath("DashDuration")
-DashCooldown = NodePath("DashCooldown")
-
-[node name="DashDuration" type="Timer" parent="FSM/Dash" unique_id=202045892]
-process_callback = 0
-wait_time = 0.2
-one_shot = true
-
-[node name="DashCooldown" type="Timer" parent="FSM/Dash" unique_id=1884045242]
-process_callback = 0
-wait_time = 0.3
-one_shot = true
+Duration = 0.2
+Cooldown = 0.3
 
 [node name="Sprint" type="Node" parent="FSM" unique_id=351724454]
 script = ExtResource("9_qlney")
 
-[node name="Brake" type="Node" parent="FSM" unique_id=1083935709 node_paths=PackedStringArray("BrakeDuration")]
+[node name="Brake" type="Node" parent="FSM" unique_id=1083935709]
 script = ExtResource("10_qlney")
-BrakeDuration = NodePath("BrakeDuration")
-
-[node name="BrakeDuration" type="Timer" parent="FSM/Brake" unique_id=1798494742]
-process_callback = 0
-wait_time = 0.2
-one_shot = true
+Duration = 0.2
 
 [node name="SprintJump" type="Node" parent="FSM" unique_id=1088488716]
 script = ExtResource("11_ynsr2")
-JumpDuration = 0.4
+Duration = 0.4
 
 [node name="Crouch" type="Node" parent="FSM" unique_id=143432291 node_paths=PackedStringArray("UpperCollision", "UpperHandPosition", "LowerHandPosition", "HoldingItemPosition")]
 script = ExtResource("12_stv0n")
@@ -398,42 +382,23 @@ LowerHandPosition = NodePath("../../ActionManager/NodeToFlipX/LowerHandPosition"
 HoldingItemPosition = NodePath("../../ActionManager/NodeToFlipX/HoldingItemPosition")
 CanExecuteAction = false
 
-[node name="Bash" type="Node" parent="FSM" unique_id=1540794319 node_paths=PackedStringArray("BashDuration")]
+[node name="Bash" type="Node" parent="FSM" unique_id=1540794319]
 script = ExtResource("14_srw78")
-BashDuration = NodePath("BashDuration")
+Duration = 0.5
 
-[node name="BashDuration" type="Timer" parent="FSM/Bash" unique_id=594219435]
-process_callback = 0
-wait_time = 0.5
-one_shot = true
-
-[node name="LedgeGrab" type="Node" parent="FSM" unique_id=1321947757 node_paths=PackedStringArray("LedgeGrabDuration", "LedgeRay")]
+[node name="LedgeGrab" type="Node" parent="FSM" unique_id=1321947757 node_paths=PackedStringArray("LedgeRay")]
 script = ExtResource("15_5iav4")
-LedgeGrabDuration = NodePath("LedgeGrabDuration")
+Duration = 0.5
 LedgeRay = NodePath("../../ActionManager/NodeToFlipX/RayCast2D")
 
-[node name="LedgeGrabDuration" type="Timer" parent="FSM/LedgeGrab" unique_id=640386201]
-process_callback = 0
-wait_time = 0.3
-one_shot = true
-
-[node name="WallSlipper" type="Node" parent="FSM" unique_id=158506593]
+[node name="WallSlipper" type="Node" parent="FSM" unique_id=158506593 node_paths=PackedStringArray("LedgeRay")]
 script = ExtResource("16_qngxf")
+LedgeRay = NodePath("../../ActionManager/NodeToFlipX/RayCast2D")
 
-[node name="WallJump" type="Node" parent="FSM" unique_id=2118525034 node_paths=PackedStringArray("WallJumpDuration", "ForceWallJumpDuration")]
+[node name="WallJump" type="Node" parent="FSM" unique_id=2118525034]
 script = ExtResource("17_yk00u")
-WallJumpDuration = NodePath("WallJumpDuration")
-ForceWallJumpDuration = NodePath("ForceWallJumpDuration")
-
-[node name="ForceWallJumpDuration" type="Timer" parent="FSM/WallJump" unique_id=155184594]
-process_callback = 0
-wait_time = 0.25
-one_shot = true
-
-[node name="WallJumpDuration" type="Timer" parent="FSM/WallJump" unique_id=136219830]
-process_callback = 0
-wait_time = 0.4
-one_shot = true
+ForceXMoveDuration = 0.2
+Duration = 0.5
 
 [node name="Glide" type="Node" parent="FSM" unique_id=144107627 node_paths=PackedStringArray("LedgeRay")]
 script = ExtResource("18_2nld2")
@@ -445,14 +410,20 @@ AttackDuration = 0.3
 MoveDuration = 0.2
 CanExecuteAction = false
 
-[node name="DashInAir" type="Node" parent="FSM" unique_id=34110650 node_paths=PackedStringArray("DashInAirDuration")]
+[node name="DashInAir" type="Node" parent="FSM" unique_id=34110650]
 script = ExtResource("19_se5w5")
-DashInAirDuration = NodePath("DashInAirDuration")
+Duration = 0.3
 
-[node name="DashInAirDuration" type="Timer" parent="FSM/DashInAir" unique_id=2035527052]
-process_callback = 0
-wait_time = 0.3
-one_shot = true
+[node name="Pogo" type="Node" parent="FSM" unique_id=1383240271 node_paths=PackedStringArray("LedgeRay")]
+script = ExtResource("20_se5w5")
+Duration = 0.3
+LedgeRay = NodePath("../../ActionManager/NodeToFlipX/RayCast2D")
+
+[node name="Damaged" type="Node" parent="FSM" unique_id=559785753]
+script = ExtResource("21_t4r5b")
+StiffDuration = 0.2
+MoveDuration = 0.2
+CanExecuteAction = false
 
 [node name="Spin" type="Node" parent="FSM" unique_id=766332449 node_paths=PackedStringArray("SpinDuration", "LedgeRay")]
 script = ExtResource("20_se5w5")
@@ -535,10 +506,11 @@ scale = Vector2(0.6855469, 0.6855469)
 texture = ExtResource("17_stv0n")
 hframes = 4
 
-[node name="Spin" type="Area2D" parent="ActionManager" unique_id=1888429837 node_paths=PackedStringArray("CooldownTimer", "animation")]
+[node name="Spin" type="Area2D" parent="ActionManager" unique_id=1888429837 node_paths=PackedStringArray("fsm", "CooldownTimer", "animation")]
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("15_lvmcp")
+fsm = NodePath("../../FSM")
 CooldownTimer = NodePath("CooldownTimer")
 animation = NodePath("AnimationPlayer")
 
@@ -620,6 +592,7 @@ offset_bottom = -9.0
 text = "InputAxis"
 metadata/_edit_use_anchors_ = true
 
+<<<<<<< Updated upstream
 [connection signal="timeout" from="FSM/JumpBufferTimer" to="FSM" method="_on_jump_buffer_timer_timeout"]
 [connection signal="timeout" from="FSM/KoyoteTimer" to="FSM" method="_on_koyote_timer_timeout"]
 [connection signal="timeout" from="FSM/Jump/JumpDuration" to="FSM/Jump" method="_on_jump_duration_timeout"]
@@ -632,4 +605,7 @@ metadata/_edit_use_anchors_ = true
 [connection signal="timeout" from="FSM/WallJump/WallJumpDuration" to="FSM/WallJump" method="_on_wall_jump_duration_timeout"]
 [connection signal="timeout" from="FSM/DashInAir/DashInAirDuration" to="FSM/DashInAir" method="_on_dash_in_air_duration_timeout"]
 [connection signal="timeout" from="FSM/Spin/SpinDuration" to="FSM/Spin" method="_on_spin_duration_timeout"]
+=======
+>>>>>>> Stashed changes
 [connection signal="timeout" from="ActionManager/AfterCastDelay" to="ActionManager" method="_on_after_cast_delay_timeout"]
+[connection signal="body_entered" from="ActionManager/Spin" to="ActionManager/Spin" method="_on_body_entered"]

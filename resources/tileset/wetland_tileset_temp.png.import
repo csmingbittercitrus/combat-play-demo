@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqkn4nbe2saru"
-path="res://.godot/imported/tileset.png-7a7730a4f3f86d7c26f0c1c55452f390.ctex"
+uid="uid://cmpuk3gcc3fxm"
+path="res://.godot/imported/wetland_tileset_temp.png-c87e164aead480d44ea4f2bff7a1df12.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/tilemap/tileset.png"
-dest_files=["res://.godot/imported/tileset.png-7a7730a4f3f86d7c26f0c1c55452f390.ctex"]
+source_file="res://resources/tileset/wetland_tileset_temp.png"
+dest_files=["res://.godot/imported/wetland_tileset_temp.png-c87e164aead480d44ea4f2bff7a1df12.ctex"]
 
 [params]
 

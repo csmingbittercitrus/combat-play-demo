@@ -7,16 +7,26 @@ using System;
 
 public partial class Bash : PlayerState
 {
-    [Export] Timer BashDuration { get; set; }
+    [Export]
+    private float Duration { get; set; }
+    private Timer BashDurationTimer { get; set; }
+
+    public override void _Ready()
+    {
+        base._Ready();
+
+        BashDurationTimer = this.AddTimerToState(Duration); 
+        BashDurationTimer.Timeout += OnBashDurationTimerTimeout;
+    }
 
     public override void Enter()
     {
-        BashDuration.Start();
+        BashDurationTimer.Start();
     }
 
     public override void Exit()
     {
-        BashDuration.Stop();
+        BashDurationTimer.Stop();
     }
 
     public override void ApplyVelocity(double delta)
@@ -39,7 +49,7 @@ public partial class Bash : PlayerState
         
     }
 
-    private void _on_bash_duration_timeout()
+    private void OnBashDurationTimerTimeout()
     {
         EmitSignalStateSwitchRequested(PlayerStateNames.Idle);
     }

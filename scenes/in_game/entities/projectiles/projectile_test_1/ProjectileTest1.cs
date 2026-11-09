@@ -14,24 +14,4 @@ public partial class ProjectileTest1 : Projectile
     {
         QueueFree();
     }
-
-    public override void HandleMelee()
-    {
-        Destroy();
-    }
-
-    public override void HandleSmash()
-    {
-        Destroy();
-    }
-
-    public override void HandleParry()
-    {
-        Destroy();
-    }
-
-    public override void HandleMagic()
-    {
-        Destroy();
-    }
 }

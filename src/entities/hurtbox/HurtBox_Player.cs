@@ -31,6 +31,8 @@ public abstract partial class HurtBox_Player : Area2D
     protected HashSet<Node2D> excludedTargets;
     [Export] protected PlayerAttackType type { get; set; }
     [Export] protected AnimationPlayer animation { get; private set; }
+
+    protected bool IsActive { get; set; } = false;
     #endregion
 
 
@@ -66,22 +68,28 @@ public abstract partial class HurtBox_Player : Area2D
         animation.Play("start_attack");
         IsCooled = false;
         CooldownTimer.Start();
+        IsActive = true;
     }
 
     public virtual void DeactivateHurtBox()
     {
         EmitSignalAttackFinished();
         animation.Play("RESET");
+        IsActive = false;
     }
 
     public void ProcessHurtBox()
     {
+        GD.Print($"Name: {Name}");
         foreach (Area2D area in GetOverlappingAreas())
         {
             if (excludedTargets.Contains(area)) continue;
             if (area is HurtBox_Hostile action)
             {
-                action.TryClash(type);
+                if (action.TryClash(type))
+                {
+                    OnParry();
+                }
                 excludedTargets.Add(area);
             }
         }
@@ -91,26 +99,27 @@ public abstract partial class HurtBox_Player : Area2D
             if (excludedTargets.Contains(body)) continue;
             if (body is IAttackable target)
             {
+                // Pogo 관련 기능 작동만 하게 해뒀음. OnHit, OnParry 포함해서 if문 안 뜯어고쳐야 함
+                OnHit(target);
                 target.HandlePlayerAttack(type);
                 excludedTargets.Add(body);
             }
+        }
+    }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        if (IsActive)
+        {
+            ProcessHurtBox();
         }
     }
     #endregion
 
 
 
-
     #region Abstract
-    public abstract void OnHit();
+    public abstract void OnHit(IAttackable body);
     public abstract void OnParry();
     #endregion
-}
-
-public enum PlayerAttackType
-{
-    Melee = 0,
-    Smash = 1,
-    Parry = 2,
-    Magic = 3,
 }

@@ -5,26 +5,48 @@ using System;
 
 public partial class WallJump : PlayerState
 {
-    [Export] private Timer WallJumpDuration { get; set; }
+    [Export]
+    private float ForceXMoveDuration { get; set; }
+    [Export]
+    private float Duration { get; set; }
 
-    [Export] private Timer ForceWallJumpDuration { get; set; }
+    private Timer DurationTimer { get; set; }
+    private Timer ForceXMoveDurationTimer { get; set; }
 
-    bool IsForced { get; set; } = false;
+    #region LifeCycle
+    public override void _Ready()
+    {
+        base._Ready();
 
+        ForceXMoveDurationTimer = this.AddTimerToState(ForceXMoveDuration);
+
+        DurationTimer = this.AddTimerToState(Duration);
+        DurationTimer.Timeout += OnWallJumpDurationTimerTimeout;
+    }
+
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+
+        DurationTimer.Timeout -= OnWallJumpDurationTimerTimeout;
+    }
+    #endregion
+
+
+
+    #region PlayerState
     public override void Enter()
     {
         FSM.CurrentActionDirection = -FSM.PrevActionDirection;
         FSM.FacingDirection = FSM.CurrentActionDirection;
 
-        ForceWallJumpDuration.Start();
-        WallJumpDuration.Start();
+        ForceXMoveDurationTimer.Start();
+        DurationTimer.Start();
 
         FSM.PlayerVelocity.X = FSM.Stats.WallJumpSpeed_X * FSM.CurrentActionDirection;
         FSM.PlayerVelocity.Y = FSM.Stats.WallJumpSpeed_Y;
 
         FSM.Player.Velocity = FSM.PlayerVelocity;
-
-        IsForced = true;
     }
 
     public override void Exit()
@@ -32,17 +54,15 @@ public partial class WallJump : PlayerState
         FSM.PrevActionDirection = FSM.CurrentActionDirection;
         FSM.CurrentActionDirection = 0.0f;
 
-        ForceWallJumpDuration.Stop();
-        WallJumpDuration.Stop();
-
-        IsForced = false;
+        ForceXMoveDurationTimer.Stop();
+        DurationTimer.Stop();
     }
 
     public override void ApplyVelocity(double delta)
     {
         float targetAccel;
         
-        if (FSM.InputAxis_X == -FSM.CurrentActionDirection && !IsForced)
+        if (FSM.InputAxis_X == -FSM.CurrentActionDirection && !ForceXMoveDurationTimer.IsStopped())
         {
             targetAccel = FSM.Stats.WallJumpAccel_X_Fast;
         }
@@ -70,14 +90,9 @@ public partial class WallJump : PlayerState
         
     }
 
-    private void _on_force_wall_jump_duration_timeout()
-    {
-        IsForced = false;
-    }
-
-    private void _on_wall_jump_duration_timeout()
+    private void OnWallJumpDurationTimerTimeout()
     {
         EmitSignalStateSwitchRequested(PlayerStateNames.Fall);
     }
-
+    #endregion
 }

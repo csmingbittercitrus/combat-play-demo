@@ -58,6 +58,14 @@ public partial class FSMStats : Resource
     public float AttackVelocity_X { get; private set; }
     [Export]
     public float AttackAccel_X { get; private set; }
+    [Export]
+    public float DamagedInitialVelocity_X { get; private set; }
+    [Export]
+    public float DamagedInitialVelocity_Y { get; private set; }
+    [Export]
+    public float DamagedAccel_X { get; private set; }
+    [Export]
+    public float DamagedAccel_Y { get; private set; }
 
 
 

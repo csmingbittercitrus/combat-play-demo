@@ -6,6 +6,8 @@ using System;
 
 public partial class WallSlipper : PlayerState
 {
+    [Export] private RayCast2D LedgeRay { get; set; }
+    
     public override void Enter()
     {
         FSM.CurrentActionDirection = -FSM.Player.GetWallNormal().X;
@@ -47,10 +49,22 @@ public partial class WallSlipper : PlayerState
         {
             EmitSignalStateSwitchRequested(PlayerStateNames.Idle);
         }
+        else if (LedgeRay.IsColliding() && LedgeRay.GetCollisionNormal().IsEqualApprox(Vector2.Up))
+        {
+            if (FSM.FacingDirection == FSM.InputAxis_X)
+            {
+                EmitSignalStateSwitchRequested(PlayerStateNames.LedgeGrab);
+            }
+        }
+        else if (!FSM.Player.IsOnWall())
+        {
+            EmitSignalStateSwitchRequested(PlayerStateNames.Fall);
+        }
         else if (FSM.InputAxis_X == FSM.FacingDirection)
         {
             EmitSignalStateSwitchRequested(PlayerStateNames.Fall);
         }
+
     }
 
     public override void HandleInputEvent(InputEvent @event)

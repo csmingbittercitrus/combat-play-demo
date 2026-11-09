@@ -1,15 +1,37 @@
 namespace Game.Player.FSM;
 
 using BitterCitrus.SRC.Core.BInput;
-using Game.Player.Actions;
 using Godot;
-using System;
-
 
 public partial class Jump : PlayerState
 {
-    [Export] Timer JumpDuration { get; set; }
+    [Export] private float Duration { get; set; }
+    [Export] RayCast2D LedgeRay { get; set; }
 
+    Timer DurationTimer { get; set; }
+
+
+
+    #region LifeCycle
+    public override void _Ready()
+    {
+        base._Ready();
+        
+        DurationTimer = this.AddTimerToState(Duration);
+        DurationTimer.Timeout += OnDurationTimerTimeout;
+    }
+
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+
+        DurationTimer.Timeout -= OnDurationTimerTimeout;
+    }
+    #endregion
+
+
+
+    #region PlayerState
     public override void Enter()
     {
         FSM.ConsumeJumpBuffer();
@@ -17,12 +39,12 @@ public partial class Jump : PlayerState
         FSM.PlayerVelocity.Y = FSM.Stats.JumpSpeed;
         FSM.Player.Velocity = FSM.PlayerVelocity;
 
-        JumpDuration.Start();
+        DurationTimer.Start();
     }
 
     public override void Exit()
     {
-        JumpDuration.Stop();
+        DurationTimer.Stop();
     }
 
     public override void ApplyVelocity(double delta)
@@ -35,9 +57,12 @@ public partial class Jump : PlayerState
     
     public override void CheckIfSwitchState(double delta)
     {
-        if (!Input.IsActionPressed(InputActionNames.Jump))
+        if (LedgeRay.IsColliding() && LedgeRay.GetCollisionNormal().IsEqualApprox(Vector2.Up))
         {
-            EmitSignalStateSwitchRequested(PlayerStateNames.Fall);
+            if (FSM.FacingDirection == FSM.InputAxis_X)
+            {
+                EmitSignalStateSwitchRequested(PlayerStateNames.LedgeGrab);
+            }
         }
         else if (FSM.Player.IsOnCeiling())
         {
@@ -54,8 +79,9 @@ public partial class Jump : PlayerState
         }
     }
 
-    private void _on_jump_duration_timeout()
+    private void OnDurationTimerTimeout()
     {
         EmitSignalStateSwitchRequested(PlayerStateNames.Fall);
     }
+    #endregion
 }

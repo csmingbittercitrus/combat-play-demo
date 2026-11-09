@@ -28,7 +28,7 @@ public partial class Melee : HurtBox_Player
 
 
 
-    public override void OnHit()
+    public override void OnHit(IAttackable body)
     {
         
     }

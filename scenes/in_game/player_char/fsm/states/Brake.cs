@@ -6,12 +6,35 @@ using System;
 
 public partial class Brake : PlayerState
 {
-    [Export] private Timer BrakeDuration { get; set; }
+    [Export]
+    private float Duration { get; set; }
+    private Timer DurationTimer { get; set; }
 
+
+    #region LifeCycle
+    public override void _Ready()
+    {
+        base._Ready();
+        
+        DurationTimer = this.AddTimerToState(Duration);
+        DurationTimer.Timeout += OnDurationTimerTimeout;
+    }
+
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+
+        DurationTimer.Timeout -= OnDurationTimerTimeout;
+    }
+    #endregion
+
+
+
+    #region PlayerState
     public override void Enter()
     {
         FSM.CurrentActionDirection = FSM.PrevActionDirection;
-        BrakeDuration.Start();
+        DurationTimer.Start();
     }
 
     public override void Exit()
@@ -19,7 +42,7 @@ public partial class Brake : PlayerState
         FSM.PrevActionDirection = FSM.CurrentActionDirection;
         FSM.CurrentActionDirection = 0.0f;
 
-        BrakeDuration.Stop();
+        DurationTimer.Stop();
     }
 
     public override void ApplyVelocity(double delta)
@@ -45,8 +68,9 @@ public partial class Brake : PlayerState
         }
     }
 
-    private void _on_brake_duration_timeout()
+    private void OnDurationTimerTimeout()
     {
         this.SwitchStateToIdleOrWalk();
     }
+    #endregion
 }

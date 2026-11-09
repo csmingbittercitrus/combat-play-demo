@@ -1,5 +1,7 @@
+namespace Game;
+
 using Game.Player;
-using Game.Player.Actions;
+using BitterCitrus.SRC.Entites;
 using Godot;
 using System;
 
@@ -14,9 +16,15 @@ public partial class CombatManager : Node
         Instance = this;
     }
 
-
     public void SetPlayer(PlayerChar player)
     {
         Player = player;
+    }
+
+    public int CalPlayerAttackDamage(PlayerAttackType type)
+    {
+        
+
+        return 0;
     }
 }

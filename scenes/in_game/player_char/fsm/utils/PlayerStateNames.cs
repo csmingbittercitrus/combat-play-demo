@@ -31,4 +31,7 @@ public static class PlayerStateNames
     public static readonly StringName Attack = "Attack";
 
     public static readonly StringName DashInAir = "DashInAir";
+    public static readonly StringName Pogo = "Pogo";
+
+    public static readonly StringName Damaged = "Damaged";
 }

@@ -1,5 +1,6 @@
 namespace BitterCitrus.SRC.BT;
 
+using Game;
 using BitterCitrus.SRC.Entites;
 using Game.Player;
 using Godot;

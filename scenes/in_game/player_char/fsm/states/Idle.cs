@@ -1,9 +1,7 @@
 namespace Game.Player.FSM;
 
 using BitterCitrus.SRC.Core.BInput;
-using Game.Player.Actions;
 using Godot;
-using System;
 
 public partial class Idle : PlayerState
 {

@@ -2,7 +2,6 @@ namespace Game.Player.FSM;
 
 using BitterCitrus.SRC.Core.BInput;
 using Godot;
-using System;
 
 public partial class Walk : PlayerState
 {

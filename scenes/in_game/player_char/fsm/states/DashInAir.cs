@@ -5,7 +5,18 @@ using System;
 
 public partial class DashInAir : PlayerState
 {
-	[Export] private Timer DashInAirDuration { get; set; }
+	[Export]
+	private float Duration { get; set; }
+
+	private Timer DashInAirDurationTimer { get; set; }
+
+	public override void _Ready()
+	{
+		base._Ready();
+
+		DashInAirDurationTimer = this.AddTimerToState(Duration);
+		DashInAirDurationTimer.Timeout += _on_dash_in_air_duration_timeout;
+	}
 
     public override bool CheckIfEnterable()
     {
@@ -22,12 +33,12 @@ public partial class DashInAir : PlayerState
 		FSM.PlayerVelocity.Y = FSM.Stats.DashInAirInitialVelocity_Y;
 		FSM.Player.Velocity = FSM.PlayerVelocity;
 
-		DashInAirDuration.Start();
+		DashInAirDurationTimer.Start();
     }
 
     public override void Exit()
     {
-        DashInAirDuration.Stop();
+        DashInAirDurationTimer.Stop();
     }
 
 	public override void ApplyVelocity(double delta)

@@ -1,15 +1,14 @@
 namespace Game.Player.FSM;
 
 using BitterCitrus.SRC.Core.BInput;
-using Game.Player.Actions;
 using Godot;
-using System;
 using System.Collections.Generic;
-
 
 public partial class Fall : PlayerState
 {
     [Export] private RayCast2D LedgeRay { get; set; }
+
+    // 코요테 관련 로직들을 fsm에 이관해야 할 것 같기도 함
     List<StringName> groundedStates = new List<StringName>
     {
         PlayerStateNames.Idle,

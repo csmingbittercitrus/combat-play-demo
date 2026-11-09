@@ -9,6 +9,7 @@ using Game.Player.Actions;
 
 public partial class Player_FSM : Node
 {
+    #region Vars and Nodes
     [Export] public PlayerChar Player { get; private set; }
     [Export] public PlayerActionManager ActionManager { get; private set; }
 
@@ -28,8 +29,11 @@ public partial class Player_FSM : Node
     [Export] public FSMStats Stats { get; private set; }
 
 
-    [Export] private Timer JumpBufferTimer { get; set; }
-    [Export] private Timer KoyoteTimer { get; set; }
+    [Export] private float JumpBufferDuration { get; set; }
+    [Export] private float KoyoteDuration { get; set; }
+
+    private Timer JumpBufferTimer { get; set; }
+    private Timer KoyoteTimer { get; set; }
 
     public bool JumpBuffer;
     public bool CanKoyoteJump;
@@ -38,7 +42,11 @@ public partial class Player_FSM : Node
     [Export] public Label DebugLabel_InputAxis { get; private set; }
 
     public bool CanDashInAir { get; set; } = true;
+    #endregion
 
+
+
+    #region Init
     public override void _Ready()
     {
         Init();
@@ -72,9 +80,29 @@ public partial class Player_FSM : Node
 
         JumpBuffer = false;
         CanKoyoteJump = false;
-    }
 
-    #region States
+        JumpBufferTimer = new();
+        KoyoteTimer = new();
+
+        JumpBufferTimer.ProcessCallback = Timer.TimerProcessCallback.Physics;
+        KoyoteTimer.ProcessCallback = Timer.TimerProcessCallback.Physics;
+
+        JumpBufferTimer.WaitTime = JumpBufferDuration;
+        KoyoteTimer.WaitTime = KoyoteDuration;
+
+        JumpBufferTimer.OneShot = true;
+        KoyoteTimer.OneShot = true;
+
+        JumpBufferTimer.Timeout += _on_jump_buffer_timer_timeout;
+        KoyoteTimer.Timeout += _on_koyote_timer_timeout;
+
+        AddChild(JumpBufferTimer);
+        AddChild(KoyoteTimer);
+    }
+    #endregion
+    
+
+    #region Axis and Direction
     public override void _PhysicsProcess(double delta)
     {
         PlayerVelocity = Player.Velocity;
@@ -103,7 +131,11 @@ public partial class Player_FSM : Node
         }
         else return 0.0f;
     }
+    #endregion
 
+
+
+    #region State
     public void SwitchState(StringName targetStateName)
     {
         if (targetStateName == null) return;
@@ -131,7 +163,11 @@ public partial class Player_FSM : Node
             CanDashInAir = true;
         }
     }
+    #endregion
 
+
+
+    #region Input and Actions
     public override void _UnhandledInput(InputEvent @event)
     {
         if (@event.IsActionPressed(InputActionNames.Slash))

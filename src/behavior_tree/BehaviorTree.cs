@@ -1,5 +1,6 @@
 namespace BitterCitrus.SRC.BT;
 
+using Game;
 using BitterCitrus.SRC.Entites;
 using Godot;
 using System;
@@ -10,7 +11,6 @@ public partial class BehaviorTree : Node
 {
     #region Settings
     [ExportCategory("Settings")]
-
 
     private bool _enabled = true;
     [Export] public bool Enabled

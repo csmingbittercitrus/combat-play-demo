@@ -58,5 +58,4 @@ public abstract partial class HandheldItem : Projectile
     public abstract void ActivateAction_Throw(float facingdirection, float InputAxis_Y);
 
     public abstract void ActivateAction_Smash(float facingdirection, float InputAxis_Y);
-    public override void HandleNonPlayerAttack() {}
 }

@@ -33,33 +33,4 @@ public partial class HandheldTest1 : HandheldItem
     {
         
     }
-
-    public override void HandleMelee()
-    {
-        Vector2 playerPosition = CombatManager.Instance.Player.GlobalPosition;
-        Vector2 bounceNormal = (GlobalPosition - playerPosition).Normalized();
-        Launch(bounceNormal, LaunchSpeed / 2);
-    }
-
-    public override void HandleSmash()
-    {
-        
-    }
-
-    public override void HandleParry()
-    {
-        Vector2 playerPosition = CombatManager.Instance.Player.GlobalPosition;
-        Vector2 bounceNormal = (GlobalPosition - playerPosition).Normalized();
-        Launch(bounceNormal, LaunchSpeed / 2);
-    }
-
-    public override void HandleMagic()
-    {
-        
-    }
-
-    public override void HandleNonPlayerAttack()
-    {
-        
-    }
 }

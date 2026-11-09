@@ -1,8 +1,11 @@
 [gd_scene format=3 uid="uid://pe7i6h2kly5a"]
 
 [ext_resource type="PackedScene" uid="uid://n07rxt8elh73" path="res://scenes/in_game/player_char/player_char.tscn" id="1_p6nwc"]
-[ext_resource type="PackedScene" uid="uid://bm2dar8fgn22f" path="res://scenes/in_game/playtest/levels/play_test_1/test1.tscn" id="2_m7kbs"]
 [ext_resource type="PackedScene" uid="uid://bqi7brr7qt4au" path="res://scenes/in_game/entities/handhelds/handheld_test_1.tscn" id="3_hodxa"]
+<<<<<<< Updated upstream
+=======
+[ext_resource type="PackedScene" uid="uid://8vvggn6bkrpq" path="res://scenes/in_game/playtest/levels/play_test_platformer_1/platformer_1.tscn" id="3_p6nwc"]
+>>>>>>> Stashed changes
 
 [node name="play_test_1" type="Node2D" unique_id=974066741]
 
@@ -11,8 +14,15 @@ position = Vector2(278.08887, 6.312378)
 
 [node name="Camera2D" type="Camera2D" parent="PlayerChar" unique_id=2076048368]
 
+<<<<<<< Updated upstream
 [node name="Test1" parent="." unique_id=1522476336 instance=ExtResource("2_m7kbs")]
 position = Vector2(-289, -873)
 
 [node name="HandheldTest1" parent="." unique_id=861019370 instance=ExtResource("3_hodxa")]
 position = Vector2(2572, -287)
+=======
+[node name="HandheldTest1" parent="." unique_id=861019370 instance=ExtResource("3_hodxa")]
+position = Vector2(2572, -287)
+
+[node name="Platformer" parent="." unique_id=1240298135 instance=ExtResource("3_p6nwc")]
+>>>>>>> Stashed changes

@@ -6,24 +6,46 @@ using System;
 
 public partial class Dash : PlayerState
 {
-    [Export] private Timer DashDuration { get; set; }
-    [Export] private Timer DashCooldown { get; set; }
+    [Export] private float Duration { get; set; }
+    [Export] private float Cooldown { get; set; }
 
-    private bool IsCooldown { get; set; } = true;
+    private Timer DurationTimer { get; set; }
+    private Timer CooldownTimer { get; set; }
 
+
+    #region LifeCycle
+    public override void _Ready()
+    {
+        base._Ready();
+        
+        DurationTimer = this.AddTimerToState(Duration);
+        DurationTimer.Timeout += OnDurationTimerTimeout;
+
+        CooldownTimer = this.AddTimerToState(Cooldown);
+    }
+
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+
+        DurationTimer.Timeout -= OnDurationTimerTimeout;
+    }
+    #endregion
+
+
+
+    #region PlayerState
     public override bool CheckIfEnterable()
     {
-        return IsCooldown;
+        return CooldownTimer.IsStopped();
     }
 
     public override void Enter()
     {
         FSM.CurrentActionDirection = FSM.LastInputAxis_X;
 
-        DashDuration.Start();
-
-        IsCooldown = false;
-        DashCooldown.Start();
+        DurationTimer.Start();
+        CooldownTimer.Start();
     }
 
     public override void Exit()
@@ -31,7 +53,7 @@ public partial class Dash : PlayerState
         FSM.PrevActionDirection = FSM.CurrentActionDirection;
         FSM.CurrentActionDirection = 0.0f;
 
-        DashDuration.Stop();
+        DurationTimer.Stop();
     }
 
     public override void ApplyVelocity(double delta)
@@ -58,13 +80,9 @@ public partial class Dash : PlayerState
         }
     }
 
-    private void _on_dash_duration_timeout()
+    private void OnDurationTimerTimeout()
     {
         this.SwitchStateToIdleOrWalk();
     }
-
-    private void _on_dash_cooldown_timeout()
-    {
-        IsCooldown = true;
-    }
+    #endregion
 }

@@ -7,19 +7,31 @@ using System;
 public partial class SprintJump : PlayerState
 {
     [Export]
-    private float JumpDuration { get; set; }
+    private float Duration { get; set; }
 
-    private Timer JumpDurationTimer { get; set; }
+    private Timer DurationTimer { get; set; }
 
+
+    #region LifeCycle
     public override void _Ready()
     {
         base._Ready();
         
-        JumpDurationTimer = this.AddTimerToState(JumpDuration);
-        JumpDurationTimer.Timeout += _OnJumpDurationTimeout;
+        DurationTimer = this.AddTimerToState(Duration);
+        DurationTimer.Timeout += OnDurationTimerTimeout;
     }
 
+    public override void _ExitTree()
+    {
+        base._ExitTree();
 
+        DurationTimer.Timeout -= OnDurationTimerTimeout;
+    }
+    #endregion
+
+
+
+    #region PlayerState
     public override void Enter()
     {
         FSM.ConsumeJumpBuffer();
@@ -30,26 +42,20 @@ public partial class SprintJump : PlayerState
         FSM.PlayerVelocity.Y = FSM.Stats.JumpSpeed;
         FSM.Player.Velocity = FSM.PlayerVelocity;
 
-        JumpDurationTimer.Start();
+        DurationTimer.Start();
     }
 
-    private void _OnJumpDurationTimeout()
+    private void OnDurationTimerTimeout()
     {
         EmitSignalStateSwitchRequested(PlayerStateNames.Fall);
     }
-
-    public override void _ExitTree()
-    {
-        JumpDurationTimer.Timeout -= _OnJumpDurationTimeout;
-    }
-
 
     public override void Exit()
     {
         FSM.PrevActionDirection = FSM.CurrentActionDirection;
         FSM.CurrentActionDirection = 0.0f;
         
-        JumpDurationTimer.Stop();
+        DurationTimer.Stop();
     }
 
     public override void ApplyVelocity(double delta)
@@ -87,4 +93,5 @@ public partial class SprintJump : PlayerState
     {
         EmitSignalStateSwitchRequested(PlayerStateNames.Fall);
     }
+    #endregion
 }

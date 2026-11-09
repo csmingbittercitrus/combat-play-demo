@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://ddpx84kvp6eg4"]
+
+[ext_resource type="Script" uid="uid://cmchnj3xo7n0f" path="res://scenes/in_game/entities/objects/pogo_objects/PogoObject.cs" id="1_e1nj6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2qss0"]
+radius = 41.773197
+
+[node name="PogoObject" type="CharacterBody2D" unique_id=1621859827]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_e1nj6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1901707947]
+shape = SubResource("CircleShape2D_2qss0")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=321114733]
+color = Color(0.44840473, 0.051302217, 0, 1)
+polygon = PackedVector2Array(-42, -7, -27, -37, -1, -43, 35, -29, 42, -8, 31, 33, 2, 43, -35, 33)
